@@ -5,3 +5,12 @@
 .toolbar-icon-mollo-dashboard-main.active:before {
   background-image: url('../../images/icons/000000/mollo_dashboard.svg');
 }
+
+// Icon Gin Theme
+.toolbar .toolbar-bar .toolbar-icon.toolbar-icon-mollo-dashboard-main:before{
+  background-image: url('../../images/icons/000000/mollo_dashboard.svg');
+  mask-image: url('../../images/icons/000000/mollo_dashboard.svg');
+  -webkit-mask-image: url('../../images/icons/000000/mollo_dashboard.svg');
+}
+
+
