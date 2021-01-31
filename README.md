@@ -1,1 +1,1 @@
-# Mollo Module Template
+# Mollo Module Dashboard

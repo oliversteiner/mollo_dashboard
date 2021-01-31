@@ -1,0 +1,7 @@
+@import '_variables';
+
+// Icon
+.toolbar-icon-mollo-dashboard-main:before,
+.toolbar-icon-mollo-dashboard-main.active:before {
+  background-image: url('../../images/icons/000000/mollo_dashboard.svg');
+}

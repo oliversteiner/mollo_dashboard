@@ -1,0 +1,9 @@
+main:
+  css:
+    theme:
+      assets/css/mollo-dashboard.css: {}
+  js:
+    assets/js/mollo_dashboard.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once

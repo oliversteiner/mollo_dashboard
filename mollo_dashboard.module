@@ -1,0 +1,45 @@
+<?php
+
+/**
+ * @file
+ * Contains mollo_dashboard.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function mollo_dashboard_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the mollo_dashboard module.
+    case 'help.page.mollo_dashboard':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('Dashboard Module for Mollo Events') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function mollo_dashboard_theme() {
+  return [
+    'mollo_dashboard' => [
+      'render element' => 'children',
+    ],
+  ];
+}
+
+// Add Library to every Page
+function mollo_dashboard_page_attachments(array &$page) {
+    if (!\Drupal::currentUser()->hasPermission('administer content')) {
+      return;
+    }
+
+  $page['#attached']['library'][] = 'mollo_dashboard/main';
+}
+
