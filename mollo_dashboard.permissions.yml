@@ -3,5 +3,5 @@
 # that they are available to enable on the permissions administration pages.
 
 'show dashboard':
-  title: Show Dashboard and Button
+  title: Show Dashboard
   description: Allow users to show the Dashboard and have a Dashboard Button in the admin main menu
