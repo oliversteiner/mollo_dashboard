@@ -44,3 +44,10 @@ button:
   dependencies:
     - core/jquery
     - core/jquery.once
+#
+#  Form
+#-----------------------#
+form:
+  css:
+    theme:
+      assets/css/dashboard-form.css: { }

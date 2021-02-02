@@ -18,18 +18,20 @@
     color: green;
   }
 
-  table.twig-variable-test{
-    th{
+  table.twig-variable-test {
+    th {
       margin: 0;
       padding: 0.5rem;
       height: 1rem;
 
     }
-    td{
+
+    td {
       margin: 0;
       padding: 0.5rem;
       height: 1rem;
-      &.failed{
+
+      &.failed {
         color: white;
         background-color: red;
       }
@@ -38,3 +40,4 @@
   }
 
 }
+

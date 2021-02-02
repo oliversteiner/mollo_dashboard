@@ -55,7 +55,13 @@ use Drupal\Core\Form\FormStateInterface;
  */
 function mollo_dashboard_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
 
-  // \Drupal::messenger()->addMessage($form);
+  // dpm($form_id);
+
+  // Add CSS for Dashboard Views Display Extender
+  if ($form_id === 'views_ui_edit_display_form') {
+    $form['#attached']['library'][] = 'mollo_dashboard/form';
+  }
+
 }
 
 
@@ -74,7 +80,7 @@ function mollo_dashboard_views_pre_render(\Drupal\views\ViewExecutable $view) {
   }
 
   // Retrieve the settings of our plugins using our custom plugin method.
-  $metadata_values = $extenders['mollo_dashboard']->getMetadataValues();
+  $metadata_values = $extenders['mollo_dashboard']->getDashboardValues();
 
   // Add the metadata tag for the title value.
   if (!empty($metadata_values['title'])) {
@@ -85,7 +91,7 @@ function mollo_dashboard_views_pre_render(\Drupal\views\ViewExecutable $view) {
       '#tag' => 'meta',
       '#attributes' => [
         'name' => $tag_name,
-        'content' => $content
+        'content' => $content,
       ],
     ];
     $view->element['#attached']['html_head'][] = [$tag, $tag_name];
@@ -100,7 +106,7 @@ function mollo_dashboard_views_pre_render(\Drupal\views\ViewExecutable $view) {
       '#tag' => 'meta',
       '#attributes' => [
         'name' => $tag_name,
-        'content' => $content
+        'content' => $content,
       ],
     ];
     $view->element['#attached']['html_head'][] = [$tag, $tag_name];

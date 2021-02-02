@@ -4,7 +4,7 @@
  * Implements hook_install().
  */
 function mollo_dashboard_install() {
-  // Enable head_metadata plugin.
+  // Enable mollo_dashboard plugin.
   $config = \Drupal::service('config.factory')->getEditable('views.settings');
   $display_extenders = $config->get('display_extenders') ?: array();
   $display_extenders[] = 'mollo_dashboard';
