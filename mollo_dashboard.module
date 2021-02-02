@@ -16,7 +16,7 @@ function mollo_dashboard_help($route_name, RouteMatchInterface $route_match) {
     case 'help.page.mollo_dashboard':
       $output = '';
       $output .= '<h3>' . t('About') . '</h3>';
-      $output .= '<p>' . t('Dashboard Module for Mollo Events') . '</p>';
+      $output .= '<p>' . t('Dashboard Module for Mollo') . '</p>';
       return $output;
 
     default:
@@ -31,6 +31,12 @@ function mollo_dashboard_theme() {
     'mollo_dashboard' => [
       'render element' => 'children',
     ],
+    'dashboard_block' => [
+      'variables' => [
+        'attributes' => [],
+        'mollo_dashboard' => [],
+      ],
+    ],
   ];
 }
 
@@ -39,6 +45,6 @@ function mollo_dashboard_page_attachments(array &$page) {
     if (!\Drupal::currentUser()->hasPermission('show dashboard')) {
       return;
     }
-  $page['#attached']['library'][] = 'mollo_dashboard/main';
+  $page['#attached']['library'][] = 'mollo_dashboard/button';
 }
 

@@ -5,10 +5,18 @@ mollo_dashboard.main:
   requirements:
     _permission: 'access administration pages'
 
-mollo_dashboard.page:
+mollo_dashboard.help:
   path: '/admin/dashboard/help'
   defaults:
     _controller: '\Drupal\help\Controller\HelpController::helpPage'
     _title: 'Help'
   requirements:
     _permission: 'access administration pages'
+
+mollo_dashboard.page:
+  path: '/dashboard'
+  defaults:
+    _controller: '\Drupal\mollo_dashboard\Controller\MolloDashboardController::page'
+    _title: 'Dashboard'
+  requirements:
+    _permission: 'access dashboard'

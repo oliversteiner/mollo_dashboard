@@ -1,9 +1,46 @@
+#
+#  Main
+#-----------------------#
 main:
   css:
     theme:
-      assets/css/mollo-dashboard.css: {}
+      assets/css/dashboard-main.css: { }
   js:
-    assets/js/mollo_dashboard.js: {}
+    assets/js/mollo_dashboard.js: { }
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+
+#
+#  Page
+#-----------------------#
+page:
+  css:
+    theme:
+      assets/css/dashboard-page.css: { }
+  js:
+    assets/js/mollo_dashboard.js: { }
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+#
+#  Block
+#-----------------------#
+block:
+  css:
+    theme:
+      assets/css/dashboard-block.css: { }
+
+#
+#  Button
+#-----------------------#
+button:
+  css:
+    theme:
+      assets/css/dashboard-main.css: { }
+      assets/css/dashboard-button.css: { }
+  js:
+    assets/js/mollo_dashboard.js: { }
   dependencies:
     - core/jquery
     - core/jquery.once

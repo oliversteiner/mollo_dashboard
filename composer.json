@@ -1,18 +1,19 @@
 {
-  "name": "drupal/mollo_dashboard",
-  "type": "drupal-module",
-  "license": "GPL-3.0+",
-  "description": "Dashboard for Drupal Mollo Modules",
-  "keywords": [
-    "drupal",
-    "mollo",
-    "template"
-  ],
-  "homepage": "https://github.com/oliversteiner/mollo_dashboard",
-  "minimum-stability": "dev",
-  "support": {
-    "issues": "https://github.com/oliversteiner/mollo_dashboard/issues",
-    "source": "https://github.com/oliversteiner/mollo_dashboard"
-  },
-  "require": {}
+    "name": "drupal/mollo_dashboard",
+    "type": "drupal-module",
+    "license": "GPL-3.0+",
+    "version": "1.1.0b",
+    "description": "Dashboard for Drupal Mollo Modules",
+    "keywords": [
+        "drupal",
+        "mollo",
+        "template"
+    ],
+    "homepage": "https://github.com/oliversteiner/mollo_dashboard",
+    "minimum-stability": "dev",
+    "support": {
+        "issues": "https://github.com/oliversteiner/mollo_dashboard/issues",
+        "source": "https://github.com/oliversteiner/mollo_dashboard"
+    },
+    "require": {}
 }

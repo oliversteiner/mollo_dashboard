@@ -1,0 +1,28 @@
+/*
+ *  --------- Dashboard ---------
+ */
+.mollo-dashboard .success {
+  color: green;
+}
+.mollo-dashboard .failed {
+  color: red;
+}
+.mollo-dashboard .css-test {
+  color: green;
+}
+.mollo-dashboard table.twig-variable-test th {
+  margin: 0;
+  padding: 0.5rem;
+  height: 1rem;
+}
+.mollo-dashboard table.twig-variable-test td {
+  margin: 0;
+  padding: 0.5rem;
+  height: 1rem;
+}
+.mollo-dashboard table.twig-variable-test td.failed {
+  color: white;
+  background-color: red;
+}
+
+/*# sourceMappingURL=dashboard-main.css.map */

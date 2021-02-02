@@ -1,5 +1,5 @@
 # Mollo Module Dashboard
-
+Version 1.1.0b
 
 ## How to use
 **Enable the Dashboard:**
@@ -12,7 +12,7 @@ Optional: Chose an Icon (via views_admintools module)
 
 **Add Fields. They are usually:**
 - Content: ID [hidden]
-- Content: Published (Formatter: Boolean / Custom output for FALSE: '<i class="fal fa-eye-slash"></i>')
+- Content: Published --> Formatter: Boolean / Custom output for FALSE: ``<i class="fal fa-eye-slash"></i>``
 - Content: Image
 - Content: Title
 - Content revision: Changed
