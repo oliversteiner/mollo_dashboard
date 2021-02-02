@@ -22,38 +22,38 @@
 
 
       {# Button Add News #}
-      <a class="user-dashboard-button lifestream-button-edit" href="/node/add/mollo_blog?destination=/admin/blog/list">
+      <a role="button" class="button button--small " href="/node/add/mollo_blog?destination=/admin/blog/list">
         <i class="fas fa-plus-circle"></i> Blog
       </a>
 
       {# Button Add Basic Page #}
-      <a class="user-dashboard-button lifestream-button-edit" href="/node/add/page?destination=/admin/page/list">
+      <a role="button" class="button button--small  " href="/node/add/page?destination=/admin/page/list">
         <i class="fas fa-plus-circle"></i> Page
       </a>
 
       {# Button Add FAQ #}
-      <a class="user-dashboard-button lifestream-button-edit" href="#">
+      <a role="button" class="button button--small  " href="#">
         <i class="fas fa-plus-circle"></i> FAQ
       </a>
 
       {# Button Add Client #}
-      <a class="user-dashboard-button lifestream-button-edit" href="#">
+      <a role="button" class="button button--small  " href="#">
         <i class="fas fa-plus-circle"></i> Client
       </a>
 
       {# Button Add Client Page #}
-      <a class="user-dashboard-button lifestream-button-edit" href="#">
+      <a role="button" class="button button--small  " href="#">
         <i class="fas fa-plus-circle"></i> Client Page
       </a>
 
       {# Button Open Media Browser #}
-      <a class="user-dashboard-button lifestream-button-edit" href="/admin/content/media-grid">
+      <a role="button" class="button button--small  " href="/admin/content/media-grid">
         <i class="fas fa-images"></i> Media
       </a>
     </div>
     <div>
       {# logout #}
-      <a class="user-dashboard-button lifestream-button-edit" href="/user/logout">
+      <a role="button" class="button button--small  " href="/user/logout">
         <i class="fas fa-user"></i> Abmelden
       </a>
     </div>
@@ -64,200 +64,27 @@
   {# ------------------------------------------------ #}
 
 
-  <div class="user-dashboard-main container-fluid">
+  <div class="mollo-dashboard-main">
 
-    {# Row #}
-    <div class="user-dashboard-row row">
 
-      {# Last edit #}
-      <div class="user-dashboard-card card">
-        <div class="card-body">
-          <div class="card-title">
-            <h4><i class="fal fa-clock"></i> Last changes</h4>
-          </div>
-          <div class="card-table">
-            {{ drupal_view('dashboard_last_edit') }}
-          </div>
+    {{ dd(mollo_dashboard) }}
+
+
+    {% for view in mollo_dashboard.views %}
+    <div class="card2">
+      <div class="card-body">
+        <div class="card-title">
+          <h4><i class="{{ view.icon }}"></i> {{ view.title }}</h4>
+        </div>
+        <div class="card-table">
+          {{ drupal_view(view.name) }}
         </div>
       </div>
-
     </div>
-
-    {# Row #}
-    <div class="user-dashboard-row row">
-      {# Col left #}
-      <div class="user-dashboard-col col-sm">
-
-        {# Internal Content #}
-        <div class="user-dashboard-card card">
-          <div class="card-body">
-            <div class="card-title">
-              <h4><i class="fal fa-lock"></i> Internal Content </h4> <small>(seen only by logged in users )</small>
-            </div>
-            <div class="card-table">
-              {{ drupal_view('dashboard_internal') }}
-            </div>
-          </div>
-        </div>
-
-        {# Unpublished Content #}
-        <div class="user-dashboard-card card">
-          <div class="card-body">
-            <div class="card-title">
-              <h4><i class="fal fa-eye-slash"></i>Unpublished Content</h4>
-            </div>
-            <div class="card-table">
-              {{ drupal_view('dashboard_unpublished') }}
-            </div>
-          </div>
-        </div>
-
-        {# Blog #}
-        <div class="user-dashboard-card card">
-          <div class="card-body">
-            <div class="card-title">
-              <h4><i class="fal fa-typewriter"></i>Blog</h4>
-              <div>
-                <a class="user-dashboard-button-list" href="/admin/blog/list"><i class="fas fa-list-alt"></i> </a>
-                <a class="user-dashboard-button-add" href="/node/add/mollo_blog?destination=/admin/blog/list"><i
-                    class="fas fa-plus-circle"></i> </a>
-              </div>
-            </div>
-            <div class="card-table">
-              {{ drupal_view('dashboard_blog') }}
-            </div>
-          </div>
-        </div>
-
-        {# Bookkeping #}
-        <div class="user-dashboard-card card">
-          <div class="card-body">
-            <div class="card-title">
-              <h4><i class="fal fa-book"></i> Bookkeeping</h4>
-              <div>
-                <a class="user-dashboard-button-list" href="/admin/bookeeping/list"><i class="fas fa-list-alt"></i> </a>
-                <a class="user-dashboard-button-add"
-                   href="/node/add/bookeeping_item?destination=/admin/bookeeping/list"><i
-                    class="fas fa-plus-circle"></i> </a>
-              </div>
-            </div>
-            <div class="card-table">
-              {{ drupal_view('dashboard_bookkeeping') }}
-            </div>
-          </div>
-        </div>
-
-        {# About-Me #}
-        <div class="user-dashboard-card card">
-          <div class="card-body">
-            <div class="card-title">
-              <h4><i class="fal fa-book"></i> About-Me</h4>
-              <div>
-                <a class="user-dashboard-button-list" href="/admin/about-me/list"><i class="fas fa-list-alt"></i> </a>
-                <a class="user-dashboard-button-add" href="/node/add/about_me_item?destination=/admin/about-me/list"><i
-                    class="fas fa-plus-circle"></i> </a>
-              </div>
-            </div>
-            <div class="card-table">
-              {{ drupal_view('dashboard_about_me') }}
-            </div>
-          </div>
-        </div>
-
-
-      </div>
-
-      {# Col right #}
-      <div class="user-dashboard-col col-sm">
-
-        {# Page #}
-        <div class="user-dashboard-card card">
-          <div class="card-body">
-            <div class="card-title">
-              <h4><i class="fal fa-file"></i> Pages </h4>
-              <div>
-                <a class="user-dashboard-button-list" href="/admin/page/list"><i class="fas fa-list-alt"></i> </a>
-                <a class="user-dashboard-button-add" href="/node/add/page"><i class="fas fa-plus-circle"></i> </a>
-              </div>
-            </div>
-            <div class="card-table">
-              {{ drupal_view('dashboard_pages') }}
-            </div>
-          </div>
-        </div>
-
-
-        {# Image Galleries #}
-        <div class="user-dashboard-card card">
-          <div class="card-body">
-            <div class="card-title">
-              <h4><i class="fal fa-images"></i> Image Galleries</h4>
-              <div>
-                <a class="user-dashboard-button-list" href="/unig"><i class="fas fa-list-alt"></i> </a>
-                <a class="user-dashboard-button-add" href="/unig/upload"><i class="fas fa-plus-circle"></i> </a>
-              </div>
-            </div>
-            <div class="card-table">
-              {{ drupal_view('dashboard_unig') }}
-            </div>
-          </div>
-        </div>
-
-
-        {# Taxonomie #}
-
-        {% set vocabularies = {
-          'Tags': 'mollo_tags',
-        } %}
-
-        <div class="user-dashboard-card card">
-          <div class="card-body">
-            <div class="card-title">
-              <h4><i class="fal fa-list-ul"></i> Lists <small>(Taxonomy)</small></h4>
-              <a class="user-dashboard-button-add" href="#"><i class="fas fa-plus-circle"></i> </a>
-            </div>
-            <div class="card-list">
-              <ul>
-                {% for key,value in vocabularies %}
-                  <li>
-                    <div>
-                      <a
-                        data-dialog-type="modal"
-                        data-dialog-options="{&quot;width&quot;:&quot;800&quot;,&quot;height&quot;:&quot;90%&quot;}"
-                        class="user-dashboard-button-add use-ajax"
-                        href="/admin/structure/taxonomy/manage/{{ value }}/add">
-                        <i class="fas fa-plus-circle"></i>
-                      </a>
-
-                      <a href="/admin/structure/taxonomy/manage/{{ value }}/overview">{{ key }}</a>
-                    </div>
-                  </li>
-                {% endfor %}
-              </ul>
-            </div>
-          </div>
-        </div>
-
-
-        {# who_s_online #}
-        <div class="user-dashboard-card card">
-          <div class="card-body">
-            <div class="card-title">
-              <h4><i class="fal fa-users"></i>Who is Online</h4>
-            </div>
-            <div class="card-text">
-
-              {{ drupal_view('who_s_online') }}
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-
-
   </div>
+  {% endfor %}
+
+</div>
 
 
 </div>
