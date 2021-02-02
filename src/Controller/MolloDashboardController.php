@@ -3,6 +3,8 @@
 namespace Drupal\mollo_dashboard\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\mollo_drupal\Utils\MolloDashboardTrait;
+use Drupal\mollo_module\Utils\MolloModuleTrait;
 
 
 /**
@@ -13,26 +15,18 @@ use Drupal\Core\Controller\ControllerBase;
  */
 class MolloDashboardController extends ControllerBase {
 
+  use \Drupal\mollo_dashboard\Utils\MolloDashboardTrait;
+
   // public  Vars for Twig Var Suggestion. Use in Template via:
   // {# @var mollo_dashboard \Drupal\mollo_dashboard\Controller\MolloDashboardController #}
 
   public $mollo_dashboard;
+
   public $test;
 
   public $foo;
 
   public $bar;
-
-
-  /**
-   * Name of our module.
-   *
-   * @return string
-   *   A module name.
-   */
-  public function getModuleName(): string {
-    return 'mollo_dashboard';
-  }
 
 
   /**
@@ -54,16 +48,6 @@ class MolloDashboardController extends ControllerBase {
     ];
   }
 
-  /**
-   * Get full path to the template.
-   *
-   * @return string
-   *   Path string.
-   */
-  protected function getTemplatePath(): string {
-    return drupal_get_path('module', $this->getModuleName()) .
-      '/templates/';
-  }
 
   /**
    * @return array
