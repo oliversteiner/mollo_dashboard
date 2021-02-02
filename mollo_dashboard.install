@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function mollo_dashboard_install() {
+  // Enable head_metadata plugin.
+  $config = \Drupal::service('config.factory')->getEditable('views.settings');
+  $display_extenders = $config->get('display_extenders') ?: array();
+  $display_extenders[] = 'mollo_dashboard';
+  $config->set('display_extenders', $display_extenders);
+  $config->save();
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function mollo_dashboard_uninstall() {
+  // Disable mollo_dashboard plugin.
+  $config = \Drupal::service('config.factory')->getEditable('views.settings');
+  $display_extenders = $config->get('display_extenders') ?: array();
+
+  $key = array_search('mollo_dashboard', $display_extenders);
+  if ($key!== FALSE) {
+    unset($display_extenders[$key]);
+    $config->set('display_extenders', $display_extenders);
+    $config->save();
+  }
+
+}
