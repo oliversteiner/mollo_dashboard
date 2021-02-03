@@ -1,5 +1,5 @@
 mollo_dashboard.main:
-  path: '/user/'
+  path: '/admin/dashboard'
   defaults:
     _title: 'Dashboard'
   requirements:

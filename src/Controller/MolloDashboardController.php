@@ -5,6 +5,7 @@ namespace Drupal\mollo_dashboard\Controller;
 use Drupal\Core\Controller\ControllerBase;
 use Drupal\mollo_drupal\Utils\MolloDashboardTrait;
 use Drupal\mollo_module\Utils\MolloModuleTrait;
+use Drupal\views\Entity\View;
 use Drupal\views\Views;
 
 
@@ -81,71 +82,72 @@ class MolloDashboardController extends ControllerBase {
    */
   private function getViewsData(): array {
 
-    $views_demo = [
-      [
-        'name' => 'dashboard_last_edit',
-        'title' => 'Last Changes',
-        'icon' => 'fal fa-clock',
-      ],
-      [
-        'name' => 'dashboard_unpublished',
-        'title' => 'Unpublished',
-        'icon' => 'fal fa-eye-slash',
-      ],
-      [
-        'name' => 'dashboard_intern',
-        'title' => 'Intern',
-        'icon' => 'fal fa-lock',
-      ],
-      [
-        'name' => 'dashboard_blog',
-        'title' => 'Blog',
-        'icon' => 'fal fa-typewriter',
-      ],
-      [
-        'name' => 'dashboard_pages',
-        'title' => 'Basic Pages',
-        'icon' => 'fal fa-file',
-      ],
-    ];
-
-    $views_icons = [
-      'dashboard_last_edit' => 'fal fa-clock',
-      'dashboard_unpublished' => 'fal fa-eye-slash',
-      'dashboard_intern' => 'fal fa-lock',
-      'dashboard_blog' => 'fal fa-typewriter',
-      'dashboard_pages' => 'fal fa-file',
-    ];
-
-    $views = [];
-
     // Get List with all View Ids
-    $views_on_site = Views::getViewsAsOptions(TRUE, 'enabled');
-
-    foreach ($views_on_site as $view_name => $view_title) {
-
-      // take only View with 'dashboard_' in name
-      $needle = 'dashboard_';
-      if (strpos($view_name, $needle) !== FALSE) {
-
-        // Title: Remove 'Dashboard' from Title
-        $title = str_replace('Dashboard', '', $view_title);
-
-        // Icon: Search in Predefined List
-        $icon = $views_icons[$view_name] ?? '';
-
-        $view['name'] = $view_name;
-        $view['title'] = $title;
-        $view['icon'] = $icon;
-        $views[] = $view;
-      }
-    }
-    //
+    //  $views_on_site = Views::getViewsAsOptions(TRUE, 'enabled');
+    //  $views = Views::getViewsAsOptions(TRUE, 'enabled');
+    $views = Views::getAllViews();
+    $vars = [];
 
     // dd($views);
 
-    $variables['mollo_dashboard']['views'] = $views;
+    foreach ($views as $view_name => $view) {
 
+      // dd($view);
+
+      $displays = $view->get('display');
+
+      foreach ($displays as $display_id => $display) {
+        $title = '';
+
+        //dd($display);
+        if (isset($display['display_options']['display_extenders']['mollo_dashboard']['dashboard']['enable']) &&
+          $display['display_options']['display_extenders']['mollo_dashboard']['dashboard']['enable'] === 1) {
+
+          // dd($display['display_options']['display_extenders']['mollo_dashboard']);
+
+
+          // Icon
+          $icon = ' ';
+          if (isset($display['display_options']['display_extenders']['views_admintools_icon']['views_admintools_icon']['icon'])) {
+            $icon = $display['display_options']['display_extenders']['views_admintools_icon']['views_admintools_icon']['icon'] ?? 'fas fa-list';
+          }
+
+          // Dashboard
+          $dashboard = $display['display_options']['display_extenders']['mollo_dashboard']['dashboard'];
+
+          // Title:
+          // 1. Get from Display Exposed
+          if (empty($title)) {
+            $title = $dashboard['title'];
+          }
+
+          // 2. Get from Display Title (Remove Word 'Dashboard' )
+          if (empty($title)) {
+            if (isset($display['display_options']['title'])) {
+              $title = $display['display_options']['title'];
+            }
+          }
+
+          // 3. Get from Display Name (Remove Word 'Dashboard' )
+          if (empty($title)) {
+            $title = $view->label();
+          }
+
+          $title = str_replace('Dashboard', '', $title);
+
+          $var = [];
+          $var['view_id'] = $view->id();
+          $var['display_id'] = $display_id;
+          $var['title'] = $title;
+          $var['icon'] = $icon;
+          $var['header'] = $dashboard;
+
+          $vars[] = $var;
+
+        }
+      }
+    }
+    $variables['mollo_dashboard']['views'] = $vars;
     return $variables;
   }
 

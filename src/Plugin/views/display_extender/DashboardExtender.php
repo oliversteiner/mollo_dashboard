@@ -2,7 +2,7 @@
 
 /**
  * @file
- * Contains \Drupal\mollo_dashboard\Plugin\views\display_extender\HeadMetadata.
+ * Contains \Drupal\dashboard\Plugin\views\display_extender\HeadMetadata.
  */
 
 namespace Drupal\mollo_dashboard\Plugin\views\display_extender;
@@ -26,97 +26,66 @@ use Drupal\Core\Form\FormStateInterface;
 class DashboardExtender extends DisplayExtenderPluginBase {
 
 
-/*  protected function defineOptions(): array {
-    $options = parent::defineOptions();
-
-    return $options;
-  }*/
-
   /**
    * Provide the key options for this plugin.
    */
   public function defineOptionsAlter(&$options) {
-/*    $options['mollo_dashboard'] = [
+
+    $node_type = 'article';
+    $options['dashboard'] = [
       'contains' => [
-        'title' => ['default' => ''],
-        'description' => ['default' => ''],
-      ],
-    ];*/
-
-    // Current Views Path
-    $view_path = $this->view->getPath();
-
-    // Read first View Row to get Content Type
-    // $node_type = $this->getUsedNodeType();
-    $node_type = 'basic_page';
-
-    $options['mollo_dashboard'] = [
-      'contains' => [
-
         // General
-        'general' => [
-          'enable' => ['default' => FALSE],
-          'size' => ['default' => FALSE],
-          'weight' => ['default' => 1],
-        ],
+        'enable' => ['default' => FALSE, 'bool'],
+        'size' => ['default' => FALSE, 'bool'],
+        'weight' => ['default' => 1],
 
         // Header
-        'header' => [
-          'title' => ['default' => 'title'],
-          'info' => ['default' => 'info'],
-        ],
+        'title' => ['default' => 'title'],
+        'info' => ['default' => 'info'],
 
         // Add New
-        'add_new' => [
-          'enable' => ['default' => TRUE],
-          'node_type' => ['default' => $node_type],
-        ],
+        'add_new_enable' => ['default' => FALSE, 'bool'],
+        'add_new_node_type' => ['default' => $node_type],
 
         //  Go to List
-        'list' => [
-          'enable' => ['default' => TRUE],
-          'path' => ['default' => '/admin/' . $node_type],
-        ],
+        'list_enable' => ['default' => FALSE, 'bool'],
+        'list_path' => ['default' => '/admin/' . $node_type],
 
         // Buttons
-        'buttons' => [
-          'button_1' => [
-            'enable' => ['default' => FALSE],
-            'label' => ['default' => ''],
-            'icon' => ['default' => ''],
-            'path' => ['default' => ''],
-          ],
-          'button_2' => [
-            'enable' => ['default' => FALSE],
-            'label' => ['default' => ''],
-            'icon' => ['default' => ''],
-            'path' => ['default' => ''],
-          ],
-          'button_3' => [
-            'enable' => ['default' => FALSE],
-            'label' => ['default' => ''],
-            'icon' => ['default' => ''],
-            'path' => ['default' => ''],
-          ],
-        ],
+        'button_1_enable' => ['default' => FALSE, 'bool'],
+        'button_1_label' => ['default' => ''],
+        'button_1_icon' => ['default' => ''],
+        'button_1_path' => ['default' => ''],
+        'button_1_use_ajax' => ['default' => ''],
+
+        'button_2_enable' => ['default' => FALSE, 'bool'],
+        'button_2_label' => ['default' => ''],
+        'button_2_icon' => ['default' => ''],
+        'button_2_path' => ['default' => ''],
+        'button_2_use_ajax' => ['default' => ''],
+
+        'button_3_enable' => ['default' => FALSE, 'bool'],
+        'button_3_label' => ['default' => ''],
+        'button_3_icon' => ['default' => ''],
+        'button_3_path' => ['default' => ''],
+        'button_3_use_ajax' => ['default' => ''],
       ],
     ];
-
   }
 
   /**
    * Provide the default summary for options and category in the views UI.
    */
   public function optionsSummary(&$categories, &$options) {
-    $categories['mollo_dashboard'] = [
+    $categories['dashboard'] = [
       'title' => t('Dashboard'),
       'column' => 'second',
     ];
-    $mollo_dashboard = $this->dashboardEnabled() ? $this->getDashboardValues() : FALSE;
-    $options['mollo_dashboard'] = [
-      'category' => 'mollo_dashboard',
+    $dashboard = $this->dashboardEnabled() ? $this->getDashboardValues() : FALSE;
+    $options['dashboard'] = [
+      'category' => 'dashboard',
       'title' => t('Dashboard'),
-      'value' => $mollo_dashboard ? $mollo_dashboard['title'] : $this->t('none'),
+      'value' => $dashboard ? $this->t('yes') : $this->t('no'),
     ];
   }
 
@@ -125,68 +94,68 @@ class DashboardExtender extends DisplayExtenderPluginBase {
    */
   public function buildOptionsForm(&$form, FormStateInterface $form_state) {
 
-    if ($form_state->get('section') == 'mollo_dashboard') {
+    if ($form_state->get('section') == 'dashboard') {
       $form['#title'] .= t('The metadata for this display');
-      $mollo_dashboard = $this->getDashboardValues();
+      $dashboard = $this->getDashboardValues();
 
-      $form['mollo_dashboard']['#type'] = 'container';
-      $form['mollo_dashboard']['#tree'] = TRUE;
+      $form['dashboard']['#type'] = 'container';
+      $form['dashboard']['#tree'] = TRUE;
 
       // Fieldset General
-      $form['mollo_dashboard']['general'] = [
+      $form['dashboard']['general'] = [
         '#type' => 'fieldset',
       ];
 
       // Enable
-      $form['mollo_dashboard']['general']['enable'] = [
+      $form['dashboard']['general']['enable'] = [
         '#type' => 'checkbox',
         '#title' => $this->t('Show this View on the Dashboard Page'),
-        '#default_value' => $mollo_dashboard['general']['enable'],
+        '#default_value' => $dashboard['enable'],
         '#prefix' =>
           '<span class="mollo-form-button-inline">',
         '#suffix' => '</span>',
       ];
 
       // Size
-      $form['mollo_dashboard']['general']['size'] = [
+      $form['dashboard']['general']['size'] = [
         '#type' => 'checkbox',
         '#title' => $this->t('Show as full size'),
-        '#default_value' => $mollo_dashboard['general']['size'],
+        '#default_value' => $dashboard['size'],
         '#prefix' =>
           '<span class="mollo-form-button-inline">',
         '#suffix' => '</span>',
       ];
 
       // Position
-      $form['mollo_dashboard']['general']['weight'] = [
+      $form['dashboard']['general']['weight'] = [
         '#title' => $this->t('Position'),
         '#type' => 'number',
         '#description' => $this->t('Digit for position weight'),
-        '#default_value' => $mollo_dashboard['general']['weight'],
+        '#default_value' => $dashboard['weight'],
         '#attributes' => [
           'class' => ['mollo-form-input-number-dashboard'],
         ],
       ];
 
       // Fieldset Header
-      $form['mollo_dashboard']['header'] = [
+      $form['dashboard']['header'] = [
         '#type' => 'fieldset',
       ];
 
       // Title
-      $form['mollo_dashboard']['header']['title'] = [
+      $form['dashboard']['header']['title'] = [
         '#title' => $this->t('Title'),
         '#type' => 'textfield',
         '#description' => $this->t('Provide a title for the Dashboard'),
-        '#default_value' => $mollo_dashboard['title'],
+        '#default_value' => $dashboard['title'],
       ];
 
       // Info Text
-      $form['mollo_dashboard']['header']['info'] = [
+      $form['dashboard']['header']['info'] = [
         '#title' => $this->t('Info'),
         '#type' => 'textfield',
         '#description' => $this->t('Additional Text for Header'),
-        '#default_value' => $mollo_dashboard['info'],
+        '#default_value' => $dashboard['info'],
       ];
 
 
@@ -194,24 +163,24 @@ class DashboardExtender extends DisplayExtenderPluginBase {
       //  ----------------------------------------------
 
       // Fieldset
-      $form['mollo_dashboard']['add_new'] = [
+      $form['dashboard']['add_new'] = [
         '#type' => 'fieldset',
       ];
       // Button
-      $form['mollo_dashboard']['add_new']['enable'] = [
+      $form['dashboard']['add_new']['enable'] = [
         '#type' => 'checkbox',
         '#title' => $this->t('Button: Add new'),
-        '#default_value' => $mollo_dashboard['add_new']['enable'],
+        '#default_value' => $dashboard['add_new_enable'],
         '#prefix' =>
           '<span class="mollo-form-button-inline">',
         '#suffix' => '</span>',
 
       ];
       // Select Node Type
-      $form['mollo_dashboard']['add_new']['node_type'] = [
+      $form['dashboard']['add_new']['node_type'] = [
         '#title' => $this->t('Content Type'),
         '#type' => 'select',
-        '#default_value' => $mollo_dashboard['add_new']['node_type'],
+        '#default_value' => $dashboard['add_new_node_type'],
         '#options' => $this->getOptionsListOfNodeTypes(),
       ];
 
@@ -219,30 +188,30 @@ class DashboardExtender extends DisplayExtenderPluginBase {
       //  Go to List
       //  ----------------------------------------------
       // Fieldset
-      $form['mollo_dashboard']['list'] = [
+      $form['dashboard']['list'] = [
         '#type' => 'fieldset',
       ];
       // Checkbox
-      $form['mollo_dashboard']['list']['enable'] = [
+      $form['dashboard']['list']['enable'] = [
         '#type' => 'checkbox',
         '#title' => $this
           ->t('Button: Go to list'),
-        '#default_value' => $mollo_dashboard['list']['enable'],
+        '#default_value' => $dashboard['list_enable'],
         '#prefix' =>
           '<span class="mollo-form-button-inline">',
         '#suffix' => '</span>',
       ];
       // Destination path
-      $form['mollo_dashboard']['list']['path'] = [
+      $form['dashboard']['list']['path'] = [
         '#type' => 'textfield',
-        '#default_value' => $mollo_dashboard['list']['path'],
+        '#default_value' => $dashboard['list_path'],
         '#description' => $this->t('Path destination'),
       ];
 
 
       //  Details Buttons
       //  ----------------------------------------------
-      $form['mollo_dashboard']['buttons'] = [
+      $form['dashboard']['buttons'] = [
         '#type' => 'details',
         '#title' => $this
           ->t('Add more buttons'),
@@ -250,133 +219,46 @@ class DashboardExtender extends DisplayExtenderPluginBase {
 
       //  Button 1
       //  ----------------------------------------------
-      $form['mollo_dashboard']['buttons']['button_1'] = [
+      $form['dashboard']['buttons']['button_1'] = [
         '#type' => 'fieldset',
       ];
 
       // Status
-      $form['mollo_dashboard']['buttons']['button_1']['enable'] = [
+      $form['dashboard']['buttons']['button_1']['enable'] = [
         '#type' => 'checkbox',
         '#title' => $this
           ->t('Button 1'),
-        '#default_value' => $mollo_dashboard['buttons']['button_1']['enable'],
+        '#default_value' => $dashboard['button_1_enable'],
       ];
 
       // Label
-      $form['mollo_dashboard']['buttons']['button_1']['label'] = [
+      $form['dashboard']['buttons']['button_1']['label'] = [
         '#type' => 'textfield',
         '#description' => $this->t('Button Label'),
-        '#default_value' => $mollo_dashboard['buttons']['button_1']['label'],
+        '#default_value' => $dashboard['button_1_label'],
       ];
 
       // Icon
-      $form['mollo_dashboard']['buttons']['button_1']['icon'] = [
+      $form['dashboard']['buttons']['button_1']['icon'] = [
         '#type' => 'textfield',
         '#description' => $this->t('Icon | Example: fal fa-home'),
-        '#default_value' => $mollo_dashboard['buttons']['button_1']['icon'],
+        '#default_value' => $dashboard['button_1_icon'],
       ];
 
       // Path
-      $form['mollo_dashboard']['buttons']['button_1']['path'] = [
+      $form['dashboard']['buttons']['button_1']['path'] = [
         '#type' => 'textfield',
         '#description' => $this->t('Path destination'),
-        '#default_value' => $mollo_dashboard['buttons']['button_1']['path'],
+        '#default_value' => $dashboard['button_1_path'],
       ];
 
       // use ajax
-      $form['mollo_dashboard']['buttons']['button_1']['use_ajax'] = [
+      $form['dashboard']['buttons']['button_1']['use_ajax'] = [
         '#type' => 'checkbox',
         '#title' => $this
           ->t('use ajax'),
-        '#default_value' => $mollo_dashboard['buttons']['button_1']['ajax'],
+        '#default_value' => $dashboard['button_1_use_ajax'],
       ];
-
-      //  Button 2
-      //  ----------------------------------------------
-      $form['mollo_dashboard']['buttons']['button_2'] = [
-        '#type' => 'fieldset',
-      ];
-
-      // Status
-      $form['mollo_dashboard']['buttons']['button_2']['status'] = [
-        '#type' => 'checkbox',
-        '#title' => $this
-          ->t('Button 2'),
-        '#default_value' => $mollo_dashboard['buttons']['button_2']['status'],
-      ];
-
-      // Label
-      $form['mollo_dashboard']['buttons']['button_2']['label'] = [
-        '#type' => 'textfield',
-        '#description' => $this->t('Button Label'),
-        '#default_value' => $mollo_dashboard['buttons']['button_2']['label'],
-      ];
-
-      // Icon
-      $form['mollo_dashboard']['buttons']['button_2']['icon'] = [
-        '#type' => 'textfield',
-        '#description' => $this->t('Icon | Example: fal fa-home'),
-        '#default_value' => $mollo_dashboard['buttons']['button_2']['icon'],
-      ];
-
-      // Path
-      $form['mollo_dashboard']['buttons']['button_2']['path'] = [
-        '#type' => 'textfield',
-        '#description' => $this->t('Path destination'),
-        '#default_value' => $mollo_dashboard['buttons']['button_2']['path'],
-      ];
-
-      // use ajax
-      $form['mollo_dashboard']['buttons']['button_2']['use_ajax'] = [
-        '#type' => 'checkbox',
-        '#title' => $this
-          ->t('use ajax'),
-        '#default_value' => $mollo_dashboard['buttons']['button_2']['ajax'],
-      ];
-
-      //  Button 3
-      //  ----------------------------------------------
-      $form['mollo_dashboard']['buttons']['button_3'] = [
-        '#type' => 'fieldset',
-      ];
-
-      // Status
-      $form['mollo_dashboard']['buttons']['button_3']['status'] = [
-        '#type' => 'checkbox',
-        '#title' => $this
-          ->t('Button 3'),
-        '#default_value' => $mollo_dashboard['buttons']['button_3']['status'],
-      ];
-
-      // Label
-      $form['mollo_dashboard']['buttons']['button_3']['label'] = [
-        '#type' => 'textfield',
-        '#description' => $this->t('Button Label'),
-        '#default_value' => $mollo_dashboard['buttons']['button_3']['label'],
-      ];
-
-      // Icon
-      $form['mollo_dashboard']['buttons']['button_3']['icon'] = [
-        '#type' => 'textfield',
-        '#description' => $this->t('Icon | Example: fal fa-home'),
-        '#default_value' => $mollo_dashboard['buttons']['button_3']['icon'],
-      ];
-
-      // Path
-      $form['mollo_dashboard']['buttons']['button_3']['path'] = [
-        '#type' => 'textfield',
-        '#description' => $this->t('Path destination'),
-        '#default_value' => $mollo_dashboard['buttons']['button_3']['path'],
-      ];
-
-      // use ajax
-      $form['mollo_dashboard']['buttons']['button_3']['use_ajax'] = [
-        '#type' => 'checkbox',
-        '#title' => $this
-          ->t('use ajax'),
-        '#default_value' => $mollo_dashboard['buttons']['button_3']['ajax'],
-      ];
-
 
     }
   }
@@ -391,9 +273,51 @@ class DashboardExtender extends DisplayExtenderPluginBase {
    * Handle any special handling on the validate form.
    */
   public function submitOptionsForm(&$form, FormStateInterface $form_state) {
-    if ($form_state->get('section') == 'mollo_dashboard') {
-      $mollo_dashboard = $form_state->getValue('mollo_dashboard');
-      $this->options['mollo_dashboard'] = $mollo_dashboard;
+    if ($form_state->get('section') == 'dashboard') {
+      $new_values = $form_state->getValue('dashboard');
+      dpm($new_values);
+
+      // General
+      $options['enable'] = $new_values['general']['enable'];
+      $options['size'] = $new_values['general']['size'];
+      $options['weight'] = $new_values['general']['weight'];
+
+      // Header
+      $options['title'] = $new_values['header']['title'];
+      $options['info'] = $new_values['header']['info'];
+
+      // Add New
+      $options['add_new_enable'] = $new_values['add_new']['enable'];
+      $options['add_new_node_type'] = $new_values['add_new']['node_type'];
+
+      //  Go to List
+      $options['list_enable'] = $new_values['list']['enable'];
+      $options['list_path'] = $new_values['list']['path'];
+
+      // Button 1
+      $options['button_1_enable'] = $new_values['button_1']['enable'];
+      $options['button_1_label'] = $new_values['button_1']['label'];
+      $options['button_1_icon'] = $new_values['button_1']['icon'];
+      $options['button_1_path'] = $new_values['button_1']['path'];
+      $options['button_1_use_ajax'] = $new_values['button_1']['use_ajax'];
+
+      // Button 2
+      $options['button_2_enable'] = $new_values['button_2']['enable'];
+      $options['button_2_label'] = $new_values['button_2']['label'];
+      $options['button_2_icon'] = $new_values['button_2']['icon'];
+      $options['button_2_path'] = $new_values['button_2']['path'];
+      $options['button_2_use_ajax'] = $new_values['button_2']['use_ajax'];
+
+      // Button 3
+      $options['button_3_enable'] = $new_values['button_3']['enable'];
+      $options['button_3_label'] = $new_values['button_3']['label'];
+      $options['button_3_icon'] = $new_values['button_3']['icon'];
+      $options['button_3_path'] = $new_values['button_3']['path'];
+      $options['button_3_use_ajax'] = $new_values['button_3']['use_ajax'];
+
+      dpm($options);
+
+      $this->options['dashboard'] = $options;
     }
   }
 
@@ -420,8 +344,8 @@ class DashboardExtender extends DisplayExtenderPluginBase {
    * Identify whether or not the current display has custom metadata defined.
    */
   public function dashboardEnabled() {
-    $mollo_dashboard = $this->getDashboardValues();
-    return !empty($mollo_dashboard['title']);
+    $dashboard = $this->getDashboardValues();
+    return !empty($dashboard['enable']);
   }
 
   /**
@@ -431,9 +355,7 @@ class DashboardExtender extends DisplayExtenderPluginBase {
    *   The head metadata values.
    */
   public function getDashboardValues() {
-    $mollo_dashboard = $this->options['mollo_dashboard'] ?? '';
-
-    return $mollo_dashboard;
+    return $this->options['dashboard'] ?? NULL;
   }
 
   /**
@@ -448,23 +370,6 @@ class DashboardExtender extends DisplayExtenderPluginBase {
       $options_node_type[$key] = $type->label();
     }
     return $options_node_type;
-  }
-
-  /**
-   * @return mixed
-   */
-  protected function getUsedNodeType() {
-    $content_type = '';
-
-    if ($this->view && $this->view->display_handler->getOption('filters')) {
-      $option_filters = $this->view->display_handler->getOption('filters');
-      if (isset($option_filters['type']) && $option_filters['type']['value']) {
-        $option_filters_types = $option_filters['type']['value'];
-        $content_type = array_keys($option_filters_types)[0];
-      }
-      return $content_type;
-    }
-    return '';
   }
 
 

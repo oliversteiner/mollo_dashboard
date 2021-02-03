@@ -10,23 +10,7 @@
 
 {#{{ dd(_context) }}#}
 
-{% set test = mollo_dashboard.test ? 'success':'failed' %}
-
-<div {{ attributes }}>
-
-  <div class="system-status-general-info__description">
-    Twig Variable Test <br>
-    <code>Plugin:Block / html.twig</code>
-  </div>
-
-  <table class="twig-variable-test {{ test }}">
-    <tr>
-      <th>Foo:</th>
-      <td class="{{ test }}">{{ mollo_dashboard.foo }}</td>
-    </tr>
-    <tr>
-      <th>Bar:</th>
-      <td class="{{ test }}">{{ mollo_dashboard.bar }}</td>
-    </tr>
-  </table>
+{# for jQuery.one you need one Element with a ID #}
+<div class="mollo-dashboard" id="mollo-dashboard">
+  {% include '@mollo_dashboard/includes/_dashboard.html.twig' %}
 </div>

@@ -1,6 +1,6 @@
-mollo_dashboard.main:
+mollo_dashboard.page:
   title: Dashboard
   description: 'Dashboard'
-  route_name: mollo_dashboard.main
+  route_name: mollo_dashboard.page
   weight: 8
   parent: system.admin

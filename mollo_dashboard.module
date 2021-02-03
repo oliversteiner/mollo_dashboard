@@ -80,36 +80,12 @@ function mollo_dashboard_views_pre_render(\Drupal\views\ViewExecutable $view) {
   }
 
   // Retrieve the settings of our plugins using our custom plugin method.
-  $metadata_values = $extenders['mollo_dashboard']->getDashboardValues();
+  $dashboardValues = $extenders['mollo_dashboard']->getDashboardValues();
 
-  // Add the metadata tag for the title value.
-  if (!empty($metadata_values['title'])) {
-    // Generate a tag name unique for this display.
-    $tag_name = 'views:' . $view->id() . ':' . $view->current_display . ':title';
-    $content = $metadata_values['title'];
-    $tag = [
-      '#tag' => 'meta',
-      '#attributes' => [
-        'name' => $tag_name,
-        'content' => $content,
-      ],
-    ];
-    $view->element['#attached']['html_head'][] = [$tag, $tag_name];
+  // Add Dashboard Values for Twig.
+  if (isset($dashboardValues['enabled']) && $dashboardValues['enabled'] === TRUE) {
+    $view->element['dashboard'] = $dashboardValues;
   }
 
-  // Add the metadata tag for the description value.
-  if (!empty($metadata_values['description'])) {
-    // Generate a tag name unique for this display.
-    $tag_name = 'views:' . $view->id() . ':' . $view->current_display . ':description';
-    $content = $metadata_values['description'];
-    $tag = [
-      '#tag' => 'meta',
-      '#attributes' => [
-        'name' => $tag_name,
-        'content' => $content,
-      ],
-    ];
-    $view->element['#attached']['html_head'][] = [$tag, $tag_name];
-  }
 
 }

@@ -1,91 +1,100 @@
 <!-- Add you custom twig html here -->
 {{ attach_library('mollo_dashboard/main') }}
 
-<h1 class="user-dashboard-title">Dashboard</h1>
 
-{# ------- User Dashboard ------- #}
-<div class="user-dashboard">
+<div class="dashboard">
+  {# Header #}
+  <header class="dashboard-header">
 
-  {# Greeting #}
-  <blockquote class="user-dashboard-greeting">{{ greeting_message }}</blockquote>
+    {# ------------------------------------------------ #}
+    {# Title #}
+    {# ------------------------------------------------ #}
+    <h1 class="dashboard-title">Dashboard</h1>
 
-  {# ------------------------------------------------ #}
-  {# Toolbar #}
-  {# ------------------------------------------------ #}
+    {# Greeting #}
+    <blockquote class="user-dashboard-greeting">{{ greeting_message }}</blockquote>
 
-  <div class="user-dashboard-toolbar">
 
-    <div>
+    {# ------------------------------------------------ #}
+    {# Toolbar #}
+    {# ------------------------------------------------ #}
 
+    <div class="dashboard-toolbar">
+
+      {# Clear Cache #}
       {{ drupal_block('clear_cache') }}
 
-
-
       {# Button Add News #}
-      <a role="button" class="button button--small " href="/node/add/mollo_blog?destination=/admin/blog/list">
+      <a role="button" class="button button--small mollo-no-break"
+         href="/node/add/mollo_blog?destination=/admin/blog/list">
         <i class="fas fa-plus-circle"></i> Blog
       </a>
 
       {# Button Add Basic Page #}
-      <a role="button" class="button button--small  " href="/node/add/page?destination=/admin/page/list">
+      <a role="button" class="button button--small  mollo-no-break" href="/node/add/page?destination=/admin/page/list">
         <i class="fas fa-plus-circle"></i> Page
       </a>
 
       {# Button Add FAQ #}
-      <a role="button" class="button button--small  " href="#">
+      <a role="button" class="button button--small  mollo-no-break" href="#">
         <i class="fas fa-plus-circle"></i> FAQ
       </a>
 
       {# Button Add Client #}
-      <a role="button" class="button button--small  " href="#">
+      <a role="button" class="button button--small  mollo-no-break" href="#">
         <i class="fas fa-plus-circle"></i> Client
       </a>
 
       {# Button Add Client Page #}
-      <a role="button" class="button button--small  " href="#">
+      <a role="button" class="button button--small  mollo-no-break" href="#">
         <i class="fas fa-plus-circle"></i> Client Page
       </a>
 
       {# Button Open Media Browser #}
-      <a role="button" class="button button--small  " href="/admin/content/media-grid">
+      <a role="button" class="button button--small  mollo-no-break" href="/admin/content/media-grid">
         <i class="fas fa-images"></i> Media
       </a>
-    </div>
-    <div>
+
       {# logout #}
-      <a role="button" class="button button--small  " href="/user/logout">
-        <i class="fas fa-user"></i> Abmelden
+      <a role="button" class="button button--small  mollo-no-break mollo-dashboard-button-logout" href="/user/logout">
+        <i class="fas fa-user"></i> Logout
       </a>
+
     </div>
-  </div>
+
+
+  </header>
+
 
   {# ------------------------------------------------ #}
   {# Main #}
   {# ------------------------------------------------ #}
 
 
-  <div class="mollo-dashboard-main">
-
-
-    {{ dd(mollo_dashboard) }}
-
+  <main class="mollo-dashboard-main">
 
     {% for view in mollo_dashboard.views %}
-    <div class="card2">
-      <div class="card-body">
-        <div class="card-title">
-          <h4><i class="{{ view.icon }}"></i> {{ view.title }}</h4>
+      <article class="card">
+        <div class="card-body">
+          <div class="card-title">
+            <h4><i class=""></i> {{ view.title }}</h4>
+          </div>
+          <div class="card-table">
+            {{ drupal_view(view.view_id, view.display_id) }}
+          </div>
         </div>
-        <div class="card-table">
-          {{ drupal_view(view.name) }}
-        </div>
-      </div>
-    </div>
-  </div>
-  {% endfor %}
+      </article>
+    {% endfor %}
 
+  </main>
+
+  {# ------------------------------------------------ #}
+  {# Footer #}
+  {# ------------------------------------------------ #}
+
+  <footer>
+    
+  </footer>
 </div>
 
-
-</div>
 {# ------- END User Dashboard ------- #}
