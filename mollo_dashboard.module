@@ -5,6 +5,7 @@
  * Contains mollo_dashboard.module.
  */
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
@@ -34,7 +35,7 @@ function mollo_dashboard_theme() {
     'dashboard_block' => [
       'variables' => [
         'attributes' => [],
-        'mollo_dashboard' => [],
+        'mollo' => ['dashboard' => []],
       ],
     ],
   ];
@@ -48,14 +49,15 @@ function mollo_dashboard_page_attachments(array &$page) {
   $page['#attached']['library'][] = 'mollo_dashboard/button';
 }
 
-use Drupal\Core\Form\FormStateInterface;
 
 /**
  * Implements hook_form_alter().
+ *
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
  */
-function mollo_dashboard_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-
-  // dpm($form_id);
+function mollo_dashboard_form_alter(&$form, FormStateInterface $form_state, $form_id) {
 
   // Add CSS for Dashboard Views Display Extender
   if ($form_id === 'views_ui_edit_display_form') {
@@ -64,28 +66,3 @@ function mollo_dashboard_form_alter(&$form, \Drupal\Core\Form\FormStateInterface
 
 }
 
-
-/**
- * Implements hook_views_pre_render().
- */
-function mollo_dashboard_views_pre_render(\Drupal\views\ViewExecutable $view) {
-  // Get the current display.
-  $display = $view->getDisplay();
-
-  // And get the list of extenders for this display.
-  $extenders = $display->getExtenders();
-  if (!isset($extenders['mollo_dashboard'])) {
-    // If the id of our plugin is not in the list something is wrong.
-    return;
-  }
-
-  // Retrieve the settings of our plugins using our custom plugin method.
-  $dashboardValues = $extenders['mollo_dashboard']->getDashboardValues();
-
-  // Add Dashboard Values for Twig.
-  if (isset($dashboardValues['enabled']) && $dashboardValues['enabled'] === TRUE) {
-    $view->element['dashboard'] = $dashboardValues;
-  }
-
-
-}

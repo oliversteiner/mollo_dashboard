@@ -9,6 +9,10 @@
 
 {{ attach_library('mollo_dashboard/page') }}
 
+<div class="mollo-dev" id="mollo-dashboard-dev">
+  {% include '@mollo_dashboard/includes/_dev.html.twig' %}
+</div>
+
 {# for jQuery.one you need one Element with a ID #}
 <div class="mollo-dashboard" id="mollo-dashboard">
   {% include '@mollo_dashboard/includes/_dashboard.html.twig' %}

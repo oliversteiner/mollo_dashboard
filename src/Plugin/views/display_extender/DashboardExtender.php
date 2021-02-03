@@ -354,8 +354,8 @@ class DashboardExtender extends DisplayExtenderPluginBase {
    * @return array
    *   The head metadata values.
    */
-  public function getDashboardValues() {
-    return $this->options['dashboard'] ?? NULL;
+  public function getDashboardValues(): array {
+    return $this->options['dashboard'] ?? [];
   }
 
   /**
