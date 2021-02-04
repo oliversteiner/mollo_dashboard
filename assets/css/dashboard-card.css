@@ -1,0 +1,70 @@
+.gin--dark-mode .mollo-dashboard-card,
+.mollo--dark-mode .mollo-dashboard-card,
+.mollo-dashboard-card {
+  margin-bottom: 50px;
+  background-color: rgba(125, 125, 125, 0.2);
+}
+.gin--dark-mode .mollo-dashboard-card header.card-header,
+.mollo--dark-mode .mollo-dashboard-card header.card-header,
+.mollo-dashboard-card header.card-header {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 0.3rem 0.5rem 0.3rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.gin--dark-mode .mollo-dashboard-card header.card-header,
+.mollo--dark-mode .mollo-dashboard-card header.card-header,
+.mollo-dashboard-card header.card-header {
+  padding: 0.5rem 1rem 0.5rem 0.5rem;
+}
+.gin--dark-mode .mollo-dashboard-card h4.card-title,
+.mollo--dark-mode .mollo-dashboard-card h4.card-title,
+.mollo-dashboard-card h4.card-title {
+  margin: 0;
+  font-size: 1.1rem;
+}
+.gin--dark-mode .mollo-dashboard-card .card-title-icon,
+.mollo--dark-mode .mollo-dashboard-card .card-title-icon,
+.mollo-dashboard-card .card-title-icon {
+  min-width: 1.5rem;
+  display: inline-block;
+}
+.gin--dark-mode .mollo-dashboard-card a.card-toolbar-item-button,
+.gin--dark-mode .mollo-dashboard-card a.card-toolbar-item-button,
+.mollo--dark-mode .mollo-dashboard-card a.card-toolbar-item-button,
+.mollo--dark-mode .mollo-dashboard-card a.card-toolbar-item-button,
+.mollo-dashboard-card a.card-toolbar-item-button,
+.mollo-dashboard-card a.card-toolbar-item-button {
+  border-color: transparent !important;
+  margin: 0;
+}
+.gin--dark-mode .mollo-dashboard-card .view-header,
+.mollo--dark-mode .mollo-dashboard-card .view-header,
+.mollo-dashboard-card .view-header {
+  font-size: 0.8rem;
+  padding: 0.5rem 2rem;
+}
+.gin--dark-mode .mollo-dashboard-card table.views-table,
+.mollo--dark-mode .mollo-dashboard-card table.views-table,
+.mollo-dashboard-card table.views-table {
+  margin: 0;
+}
+.gin--dark-mode .mollo-dashboard-card table.views-table td,
+.mollo--dark-mode .mollo-dashboard-card table.views-table td,
+.mollo-dashboard-card table.views-table td {
+  height: auto;
+}
+
+.card-toolbar-item-button-icon {
+  margin-right: 5px;
+}
+
+.card-toolbar-item-button:hover .card-toolbar-item-button-icon {
+  color: black;
+}
+.card-toolbar-item-button:hover .card-toolbar-item-button-icon svg {
+  fill: black !important;
+}
+
+/*# sourceMappingURL=dashboard-card.css.map */

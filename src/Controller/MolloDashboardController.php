@@ -22,9 +22,7 @@ class MolloDashboardController extends ControllerBase {
   // public  Vars for Twig Var Suggestion. Use in Template via:
   // {# @var mollo_dashboard \Drupal\mollo_dashboard\Controller\MolloDashboardController #}
 
-  public $mollo_dashboard;
-
-  public $test;
+  public $dashboard;
 
   public $foo;
 
@@ -37,6 +35,45 @@ class MolloDashboardController extends ControllerBase {
   public $title;
 
   public $icon;
+
+  public $add_new;
+
+  public $view_id;
+
+  public $display_id;
+
+  public $enable;
+
+  public $size;
+
+  public $weight;
+
+  public $info;
+
+  public $list;
+
+  public $buttons;
+
+  public $button_1;
+
+  public $button_2;
+
+  public $button_3;
+
+  public $label;
+
+  public $path;
+
+  public $use_ajax;
+
+  /**
+   * @property $test
+   */
+  function view() {
+    $test = '';
+  }
+
+
 
 
   /**
@@ -115,6 +152,7 @@ class MolloDashboardController extends ControllerBase {
           // Dashboard
           $dashboard = $display['display_options']['display_extenders']['mollo_dashboard']['dashboard'];
 
+
           // Title:
           // 1. Get from Display Exposed
           if (empty($title)) {
@@ -140,14 +178,44 @@ class MolloDashboardController extends ControllerBase {
           $var['display_id'] = $display_id;
           $var['title'] = $title;
           $var['icon'] = $icon;
-          $var['header'] = $dashboard;
+
+          // General
+          $var["enable"] = $dashboard["enable"];
+          $var["size"] = $dashboard["size"];
+          $var["weight"] = $dashboard["weight"];
+          $var["title"] = $dashboard["title"];
+          $var["info"] = $dashboard["info"];
+
+          // Buttons
+          $var['add_new']["enable"] = $dashboard["add_new_enable"];
+          $var['add_new']["node_type"] = $dashboard["add_new_node_type"];
+          $var['list']["enable"] = $dashboard["list_enable"];
+          $var['list']["path"] = $dashboard["list_path"];
+
+          // Aditional Buttons
+          $var['buttons']['button_1']["enable"] = $dashboard["button_1_enable"];
+          $var['buttons']['button_1']["label"] = $dashboard["button_1_label"];
+          $var['buttons']['button_1']["icon"] = $dashboard["button_1_icon"];
+          $var['buttons']['button_1']["path"] = $dashboard["button_1_path"];
+          $var['buttons']['button_1']["use_ajax"] = $dashboard["button_1_use_ajax"];
+          $var['buttons']['button_2']["enable"] = $dashboard["button_2_enable"];
+          $var['buttons']['button_2']["label"] = $dashboard["button_2_label"];
+          $var['buttons']['button_2']["icon"] = $dashboard["button_2_icon"];
+          $var['buttons']['button_2']["path"] = $dashboard["button_2_path"];
+          $var['buttons']['button_2']["use_ajax"] = $dashboard["button_2_use_ajax"];
+          $var['buttons']['button_3']["enable"] = $dashboard["button_3_enable"];
+          $var['buttons']['button_3']["label"] = $dashboard["button_3_label"];
+          $var['buttons']['button_3']["icon"] = $dashboard["button_3_icon"];
+          $var['buttons']['button_3']["path"] = $dashboard["button_3_path"];
+          $var['buttons']['button_3']["use_ajax"] = $dashboard["button_3_use_ajax"];
+
 
           $vars[] = $var;
 
         }
       }
     }
-    $variables['mollo_dashboard']['views'] = $vars;
+    $variables['dashboards'] = $vars;
     return $variables;
   }
 

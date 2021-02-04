@@ -1,4 +1,11 @@
 #
+#  Card
+#-----------------------#
+card:
+  css:
+    theme:
+      assets/css/dashboard-card.css: { }
+#
 #  Main
 #-----------------------#
 main:
@@ -30,7 +37,6 @@ block:
   css:
     theme:
       assets/css/dashboard-block.css: { }
-
 #
 #  Button
 #-----------------------#

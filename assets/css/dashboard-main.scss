@@ -6,38 +6,24 @@
 
 .mollo-dashboard {
 
-  .success {
-    color: green;
+  .dashboard-toolbar {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
   }
 
-  .failed {
-    color: red;
-  }
+.block-clear-cache{
+  display: inline-block;
+  margin-right: 20px;
+}
 
-  .css-test {
-    color: green;
-  }
 
-  table.twig-variable-test {
-    th {
-      margin: 0;
-      padding: 0.5rem;
-      height: 1rem;
+  .button.button--small {
+    border: 1px !important;
 
+    i,svg{
+      margin-right: 5px;
     }
-
-    td {
-      margin: 0;
-      padding: 0.5rem;
-      height: 1rem;
-
-      &.failed {
-        color: white;
-        background-color: red;
-      }
-    }
-
   }
-
 }
 

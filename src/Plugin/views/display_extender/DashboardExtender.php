@@ -217,49 +217,52 @@ class DashboardExtender extends DisplayExtenderPluginBase {
           ->t('Add more buttons'),
       ];
 
-      //  Button 1
-      //  ----------------------------------------------
-      $form['dashboard']['buttons']['button_1'] = [
-        '#type' => 'fieldset',
-      ];
 
-      // Status
-      $form['dashboard']['buttons']['button_1']['enable'] = [
-        '#type' => 'checkbox',
-        '#title' => $this
-          ->t('Button 1'),
-        '#default_value' => $dashboard['button_1_enable'],
-      ];
+      foreach (range(1, 3) as $number) {
 
-      // Label
-      $form['dashboard']['buttons']['button_1']['label'] = [
-        '#type' => 'textfield',
-        '#description' => $this->t('Button Label'),
-        '#default_value' => $dashboard['button_1_label'],
-      ];
+        //  Button 1
+        //  ----------------------------------------------
+        $form['dashboard']['buttons']['button_' . $number] = [
+          '#type' => 'fieldset',
+        ];
 
-      // Icon
-      $form['dashboard']['buttons']['button_1']['icon'] = [
-        '#type' => 'textfield',
-        '#description' => $this->t('Icon | Example: fal fa-home'),
-        '#default_value' => $dashboard['button_1_icon'],
-      ];
+        // Status
+        $form['dashboard']['buttons']['button_' . $number]['enable'] = [
+          '#type' => 'checkbox',
+          '#title' => $this
+            ->t('Button 1'),
+          '#default_value' => $dashboard['button_' . $number . '_enable'],
+        ];
 
-      // Path
-      $form['dashboard']['buttons']['button_1']['path'] = [
-        '#type' => 'textfield',
-        '#description' => $this->t('Path destination'),
-        '#default_value' => $dashboard['button_1_path'],
-      ];
+        // Label
+        $form['dashboard']['buttons']['button_' . $number]['label'] = [
+          '#type' => 'textfield',
+          '#description' => $this->t('Button Label'),
+          '#default_value' => $dashboard['button_' . $number . '_label'],
+        ];
 
-      // use ajax
-      $form['dashboard']['buttons']['button_1']['use_ajax'] = [
-        '#type' => 'checkbox',
-        '#title' => $this
-          ->t('use ajax'),
-        '#default_value' => $dashboard['button_1_use_ajax'],
-      ];
+        // Icon
+        $form['dashboard']['buttons']['button_' . $number]['icon'] = [
+          '#type' => 'textfield',
+          '#description' => $this->t('Icon | Example: fal fa-home'),
+          '#default_value' => $dashboard['button_' . $number . '_icon'],
+        ];
 
+        // Path
+        $form['dashboard']['buttons']['button_' . $number]['path'] = [
+          '#type' => 'textfield',
+          '#description' => $this->t('Path destination'),
+          '#default_value' => $dashboard['button_' . $number . '_path'],
+        ];
+
+        // use ajax
+        $form['dashboard']['buttons']['button_' . $number]['use_ajax'] = [
+          '#type' => 'checkbox',
+          '#title' => $this
+            ->t('use ajax'),
+          '#default_value' => $dashboard['button_' . $number . '_use_ajax'],
+        ];
+      }
     }
   }
 
@@ -295,25 +298,25 @@ class DashboardExtender extends DisplayExtenderPluginBase {
       $options['list_path'] = $new_values['list']['path'];
 
       // Button 1
-      $options['button_1_enable'] = $new_values['button_1']['enable'];
-      $options['button_1_label'] = $new_values['button_1']['label'];
-      $options['button_1_icon'] = $new_values['button_1']['icon'];
-      $options['button_1_path'] = $new_values['button_1']['path'];
-      $options['button_1_use_ajax'] = $new_values['button_1']['use_ajax'];
+      $options['button_1_enable'] = $new_values['buttons']['button_1']['enable'];
+      $options['button_1_label'] = $new_values['buttons']['button_1']['label'];
+      $options['button_1_icon'] = $new_values['buttons']['button_1']['icon'];
+      $options['button_1_path'] = $new_values['buttons']['button_1']['path'];
+      $options['button_1_use_ajax'] = $new_values['buttons']['button_1']['use_ajax'];
 
       // Button 2
-      $options['button_2_enable'] = $new_values['button_2']['enable'];
-      $options['button_2_label'] = $new_values['button_2']['label'];
-      $options['button_2_icon'] = $new_values['button_2']['icon'];
-      $options['button_2_path'] = $new_values['button_2']['path'];
-      $options['button_2_use_ajax'] = $new_values['button_2']['use_ajax'];
+      $options['button_2_enable'] = $new_values['buttons']['button_2']['enable'];
+      $options['button_2_label'] = $new_values['buttons']['button_2']['label'];
+      $options['button_2_icon'] = $new_values['buttons']['button_2']['icon'];
+      $options['button_2_path'] = $new_values['buttons']['button_2']['path'];
+      $options['button_2_use_ajax'] = $new_values['buttons']['button_2']['use_ajax'];
 
       // Button 3
-      $options['button_3_enable'] = $new_values['button_3']['enable'];
-      $options['button_3_label'] = $new_values['button_3']['label'];
-      $options['button_3_icon'] = $new_values['button_3']['icon'];
-      $options['button_3_path'] = $new_values['button_3']['path'];
-      $options['button_3_use_ajax'] = $new_values['button_3']['use_ajax'];
+      $options['button_3_enable'] = $new_values['buttons']['button_3']['enable'];
+      $options['button_3_label'] = $new_values['buttons']['button_3']['label'];
+      $options['button_3_icon'] = $new_values['buttons']['button_3']['icon'];
+      $options['button_3_path'] = $new_values['buttons']['button_3']['path'];
+      $options['button_3_use_ajax'] = $new_values['buttons']['button_3']['use_ajax'];
 
       dpm($options);
 

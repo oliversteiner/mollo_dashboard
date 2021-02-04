@@ -1,3 +1,7 @@
+:root {
+  --mollo--dark-mode: red;
+}
+
 .mollo-dashboard-css-test {
   color: #0a7bc1;
 }
