@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":["dashboard-button.scss"],"names":[],"mappings":"AAGA;AAAA;EAEE;;;AAIF;EACE;EACA;EACA","file":"dashboard-button.css"}
+{"version":3,"sourceRoot":"","sources":["_variables.scss","dashboard-button.scss"],"names":[],"mappings":"AAAA;EACE;;;ACEF;AAAA;EAEE;;;AAIF;EACE;EACA;EACA","file":"dashboard-button.css"}

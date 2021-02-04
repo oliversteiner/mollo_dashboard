@@ -1,1 +1,1 @@
-{"version":3,"sourceRoot":"","sources":[],"names":[],"mappings":"","file":"dashboard-block.css"}
+{"version":3,"sourceRoot":"","sources":["_variables.scss"],"names":[],"mappings":"AAAA;EACE","file":"dashboard-block.css"}

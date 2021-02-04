@@ -1,4 +1,11 @@
 #
+#  Card
+#-----------------------#
+card:
+  css:
+    theme:
+      assets/css/dashboard-card.css: { }
+#
 #  Main
 #-----------------------#
 main:
@@ -30,7 +37,6 @@ block:
   css:
     theme:
       assets/css/dashboard-block.css: { }
-
 #
 #  Button
 #-----------------------#
@@ -44,3 +50,10 @@ button:
   dependencies:
     - core/jquery
     - core/jquery.once
+#
+#  Form
+#-----------------------#
+form:
+  css:
+    theme:
+      assets/css/dashboard-form.css: { }

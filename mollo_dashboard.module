@@ -5,6 +5,7 @@
  * Contains mollo_dashboard.module.
  */
 
+use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\Routing\RouteMatchInterface;
 
 /**
@@ -34,7 +35,7 @@ function mollo_dashboard_theme() {
     'dashboard_block' => [
       'variables' => [
         'attributes' => [],
-        'mollo_dashboard' => [],
+        'mollo' => ['dashboard' => []],
       ],
     ],
   ];
@@ -42,9 +43,26 @@ function mollo_dashboard_theme() {
 
 // Add Library to every Page
 function mollo_dashboard_page_attachments(array &$page) {
-    if (!\Drupal::currentUser()->hasPermission('show dashboard')) {
-      return;
-    }
+  if (!\Drupal::currentUser()->hasPermission('show dashboard')) {
+    return;
+  }
   $page['#attached']['library'][] = 'mollo_dashboard/button';
+}
+
+
+/**
+ * Implements hook_form_alter().
+ *
+ * @param $form
+ * @param \Drupal\Core\Form\FormStateInterface $form_state
+ * @param $form_id
+ */
+function mollo_dashboard_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+
+  // Add CSS for Dashboard Views Display Extender
+  if ($form_id === 'views_ui_edit_display_form') {
+    $form['#attached']['library'][] = 'mollo_dashboard/form';
+  }
+
 }
 
