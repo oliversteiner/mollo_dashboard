@@ -4,3 +4,9 @@ mollo_dashboard.page:
   route_name: mollo_dashboard.page
   weight: 8
   parent: system.admin
+
+mollo_dashboard.settings:
+  title: Settings
+  parent: system.admin_config_system
+  route_name: mollo_dashboard.settings
+  weight: 10
