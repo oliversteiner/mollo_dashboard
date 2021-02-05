@@ -1,0 +1,16 @@
+{# ------------------------------------------------ #}
+{# Dashboard Block #}
+{# ------------------------------------------------ #}
+
+{# For twig Variable suggestion #}
+{# @var mollo_block \Drupal\mollo_dashboard\Controller\MolloDashboardController #}
+
+
+{{ attach_library('mollo_dashboard/block') }}
+
+{#{{ dd(_context) }}#}
+
+{# for jQuery.one you need one Element with a ID #}
+<div class="mollo-dashboard" id="mollo-dashboard">
+  {% include '@mollo_dashboard/includes/_dashboard.html.twig' %}
+</div>

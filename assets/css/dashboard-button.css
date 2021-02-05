@@ -1,3 +1,7 @@
+:root {
+  --mollo--dark-mode: red;
+}
+
 .toolbar-icon-mollo-dashboard-main:before,
 .toolbar-icon-mollo-dashboard-main.active:before {
   background-image: url("../../images/icons/000000/mollo_dashboard.svg");
@@ -9,4 +13,4 @@
   -webkit-mask-image: url("../../images/icons/000000/mollo_dashboard.svg");
 }
 
-/*# sourceMappingURL=mollo-dashboard.css.map */
+/*# sourceMappingURL=dashboard-button.css.map */

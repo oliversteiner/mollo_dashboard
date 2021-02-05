@@ -1,6 +1,10 @@
-name: 'Mollo Dashboard Module'
+name: 'Dashboard'
 type: module
 description: 'Dashboard for Drupal Mollo Modules'
 core: 8.x
 core_version_requirement: ^8 || ^9
 package: 'Mollo'
+dependencies:
+  - views
+  - mollo_utils
+  - views_admintools

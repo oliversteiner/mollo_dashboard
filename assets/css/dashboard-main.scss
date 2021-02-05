@@ -1,0 +1,28 @@
+/*
+ *  --------- Dashboard ---------
+ */
+
+@import '_variables';
+
+.mollo-dashboard {
+
+  .dashboard-toolbar {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+.block-clear-cache{
+  display: inline-block;
+  margin-right: 20px;
+}
+
+
+  .button.button--small {
+    border: 1px !important;
+
+    i,svg{
+      margin-right: 5px;
+    }
+  }
+}

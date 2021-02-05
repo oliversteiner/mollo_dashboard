@@ -1,0 +1,16 @@
+{# ------------------------------------------------ #}
+{# Dashboard Page #}
+{# ------------------------------------------------ #}
+
+{# For twig Variable suggestion #}
+{# @var mollo_dashboard \Drupal\mollo_dashboard\Controller\MolloDashboardController:page #}
+
+{# {{ dd(_context) }} #}
+
+{{ attach_library('mollo_dashboard/page') }}
+
+{# for jQuery.one you need one Element with a ID #}
+<div class="mollo-dashboard" id="mollo-dashboard">
+
+  {% include '@mollo_dashboard/includes/_dashboard.html.twig' %}
+</div>

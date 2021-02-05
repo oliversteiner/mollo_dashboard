@@ -1,0 +1,10 @@
+.mollo-dashboard-settings-form .mollo-form-elem-inline {
+  display: inline-block;
+  padding-right: 10px;
+  min-width: 20%;
+}
+.mollo-dashboard-settings-form .mollo-form-input-number-dashboard {
+  width: 10em;
+}
+
+/*# sourceMappingURL=dashboard-form.css.map */

@@ -1,0 +1,24 @@
+/*
+ *  --------- Dashboard ---------
+ */
+:root {
+  --mollo--dark-mode: red;
+}
+
+.mollo-dashboard .dashboard-toolbar {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+.mollo-dashboard .block-clear-cache {
+  display: inline-block;
+  margin-right: 20px;
+}
+.mollo-dashboard .button.button--small {
+  border: 1px !important;
+}
+.mollo-dashboard .button.button--small i, .mollo-dashboard .button.button--small svg {
+  margin-right: 5px;
+}
+
+/*# sourceMappingURL=dashboard-main.css.map */
