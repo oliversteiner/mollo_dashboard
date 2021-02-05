@@ -35,7 +35,7 @@ class DashboardExtender extends DisplayExtenderPluginBase {
     $options['dashboard'] = [
       'contains' => [
         // General
-        'enable' => ['default' => FALSE, 'bool'],
+        'enabled' => ['default' => FALSE, 'bool'],
         'size' => ['default' => FALSE, 'bool'],
         'weight' => ['default' => 1],
 
@@ -44,27 +44,27 @@ class DashboardExtender extends DisplayExtenderPluginBase {
         'info' => ['default' => 'info'],
 
         // Add New
-        'add_new_enable' => ['default' => FALSE, 'bool'],
+        'add_new_enabled' => ['default' => FALSE, 'bool'],
         'add_new_node_type' => ['default' => $node_type],
 
         //  Go to List
-        'list_enable' => ['default' => FALSE, 'bool'],
+        'list_enabled' => ['default' => FALSE, 'bool'],
         'list_path' => ['default' => '/admin/' . $node_type],
 
         // Buttons
-        'button_1_enable' => ['default' => FALSE, 'bool'],
+        'button_1_enabled' => ['default' => FALSE, 'bool'],
         'button_1_label' => ['default' => ''],
         'button_1_icon' => ['default' => ''],
         'button_1_path' => ['default' => ''],
         'button_1_use_ajax' => ['default' => ''],
 
-        'button_2_enable' => ['default' => FALSE, 'bool'],
+        'button_2_enabled' => ['default' => FALSE, 'bool'],
         'button_2_label' => ['default' => ''],
         'button_2_icon' => ['default' => ''],
         'button_2_path' => ['default' => ''],
         'button_2_use_ajax' => ['default' => ''],
 
-        'button_3_enable' => ['default' => FALSE, 'bool'],
+        'button_3_enabled' => ['default' => FALSE, 'bool'],
         'button_3_label' => ['default' => ''],
         'button_3_icon' => ['default' => ''],
         'button_3_path' => ['default' => ''],
@@ -107,10 +107,10 @@ class DashboardExtender extends DisplayExtenderPluginBase {
       ];
 
       // Enable
-      $form['dashboard']['general']['enable'] = [
+      $form['dashboard']['general']['enabled'] = [
         '#type' => 'checkbox',
         '#title' => $this->t('Show this View on the Dashboard Page'),
-        '#default_value' => $dashboard['enable'],
+        '#default_value' => $dashboard['enabled'],
         '#prefix' =>
           '<span class="mollo-form-button-inline">',
         '#suffix' => '</span>',
@@ -167,10 +167,10 @@ class DashboardExtender extends DisplayExtenderPluginBase {
         '#type' => 'fieldset',
       ];
       // Button
-      $form['dashboard']['add_new']['enable'] = [
+      $form['dashboard']['add_new']['enabled'] = [
         '#type' => 'checkbox',
         '#title' => $this->t('Button: Add new'),
-        '#default_value' => $dashboard['add_new_enable'],
+        '#default_value' => $dashboard['add_new_enabled'],
         '#prefix' =>
           '<span class="mollo-form-button-inline">',
         '#suffix' => '</span>',
@@ -192,11 +192,11 @@ class DashboardExtender extends DisplayExtenderPluginBase {
         '#type' => 'fieldset',
       ];
       // Checkbox
-      $form['dashboard']['list']['enable'] = [
+      $form['dashboard']['list']['enabled'] = [
         '#type' => 'checkbox',
         '#title' => $this
           ->t('Button: Go to list'),
-        '#default_value' => $dashboard['list_enable'],
+        '#default_value' => $dashboard['list_enabled'],
         '#prefix' =>
           '<span class="mollo-form-button-inline">',
         '#suffix' => '</span>',
@@ -220,47 +220,49 @@ class DashboardExtender extends DisplayExtenderPluginBase {
 
       foreach (range(1, 3) as $number) {
 
+        $button_name = 'button_' . $number;
+
         //  Button 1
         //  ----------------------------------------------
-        $form['dashboard']['buttons']['button_' . $number] = [
+        $form['dashboard']['buttons'][$button_name] = [
           '#type' => 'fieldset',
         ];
 
         // Status
-        $form['dashboard']['buttons']['button_' . $number]['enable'] = [
+        $form['dashboard']['buttons'][$button_name]['enabled'] = [
           '#type' => 'checkbox',
           '#title' => $this
             ->t('Button 1'),
-          '#default_value' => $dashboard['button_' . $number . '_enable'],
+          '#default_value' => $dashboard['button_' . $number . '_enabled'],
         ];
 
         // Label
-        $form['dashboard']['buttons']['button_' . $number]['label'] = [
+        $form['dashboard']['buttons'][$button_name]['label'] = [
           '#type' => 'textfield',
           '#description' => $this->t('Button Label'),
-          '#default_value' => $dashboard['button_' . $number . '_label'],
+          '#default_value' => $dashboard[$button_name . '_label'],
         ];
 
         // Icon
-        $form['dashboard']['buttons']['button_' . $number]['icon'] = [
+        $form['dashboard']['buttons'][$button_name]['icon'] = [
           '#type' => 'textfield',
           '#description' => $this->t('Icon | Example: fal fa-home'),
-          '#default_value' => $dashboard['button_' . $number . '_icon'],
+          '#default_value' => $dashboard[$button_name . '_icon'],
         ];
 
         // Path
-        $form['dashboard']['buttons']['button_' . $number]['path'] = [
+        $form['dashboard']['buttons'][$button_name]['path'] = [
           '#type' => 'textfield',
           '#description' => $this->t('Path destination'),
-          '#default_value' => $dashboard['button_' . $number . '_path'],
+          '#default_value' => $dashboard[$button_name . '_path'],
         ];
 
         // use ajax
-        $form['dashboard']['buttons']['button_' . $number]['use_ajax'] = [
+        $form['dashboard']['buttons'][$button_name]['use_ajax'] = [
           '#type' => 'checkbox',
           '#title' => $this
             ->t('use ajax'),
-          '#default_value' => $dashboard['button_' . $number . '_use_ajax'],
+          '#default_value' => $dashboard[$button_name . '_use_ajax'],
         ];
       }
     }
@@ -281,7 +283,7 @@ class DashboardExtender extends DisplayExtenderPluginBase {
       dpm($new_values);
 
       // General
-      $options['enable'] = $new_values['general']['enable'];
+      $options['enabled'] = $new_values['general']['enabled'];
       $options['size'] = $new_values['general']['size'];
       $options['weight'] = $new_values['general']['weight'];
 
@@ -290,29 +292,29 @@ class DashboardExtender extends DisplayExtenderPluginBase {
       $options['info'] = $new_values['header']['info'];
 
       // Add New
-      $options['add_new_enable'] = $new_values['add_new']['enable'];
+      $options['add_new_enabled'] = $new_values['add_new']['enabled'];
       $options['add_new_node_type'] = $new_values['add_new']['node_type'];
 
       //  Go to List
-      $options['list_enable'] = $new_values['list']['enable'];
+      $options['list_enabled'] = $new_values['list']['enabled'];
       $options['list_path'] = $new_values['list']['path'];
 
       // Button 1
-      $options['button_1_enable'] = $new_values['buttons']['button_1']['enable'];
+      $options['button_1_enabled'] = $new_values['buttons']['button_1']['enabled'];
       $options['button_1_label'] = $new_values['buttons']['button_1']['label'];
       $options['button_1_icon'] = $new_values['buttons']['button_1']['icon'];
       $options['button_1_path'] = $new_values['buttons']['button_1']['path'];
       $options['button_1_use_ajax'] = $new_values['buttons']['button_1']['use_ajax'];
 
       // Button 2
-      $options['button_2_enable'] = $new_values['buttons']['button_2']['enable'];
+      $options['button_2_enabled'] = $new_values['buttons']['button_2']['enabled'];
       $options['button_2_label'] = $new_values['buttons']['button_2']['label'];
       $options['button_2_icon'] = $new_values['buttons']['button_2']['icon'];
       $options['button_2_path'] = $new_values['buttons']['button_2']['path'];
       $options['button_2_use_ajax'] = $new_values['buttons']['button_2']['use_ajax'];
 
       // Button 3
-      $options['button_3_enable'] = $new_values['buttons']['button_3']['enable'];
+      $options['button_3_enabled'] = $new_values['buttons']['button_3']['enabled'];
       $options['button_3_label'] = $new_values['buttons']['button_3']['label'];
       $options['button_3_icon'] = $new_values['buttons']['button_3']['icon'];
       $options['button_3_path'] = $new_values['buttons']['button_3']['path'];
@@ -348,7 +350,7 @@ class DashboardExtender extends DisplayExtenderPluginBase {
    */
   public function dashboardEnabled() {
     $dashboard = $this->getDashboardValues();
-    return !empty($dashboard['enable']);
+    return !empty($dashboard['enabled']);
   }
 
   /**

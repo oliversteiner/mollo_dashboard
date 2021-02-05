@@ -1,14 +1,9 @@
-.mollo-form-button-inline {
+.mollo-dashboard-settings-form .mollo-form-elem-inline {
   display: inline-block;
-  margin-right: 20px;
+  padding-right: 10px;
+  min-width: 20%;
 }
-
-.mollo-form-input-inline {
-  display: inline-block;
-  margin-right: 20px;
-}
-
-.mollo-form-input-number-dashboard {
+.mollo-dashboard-settings-form .mollo-form-input-number-dashboard {
   width: 10em;
 }
 
