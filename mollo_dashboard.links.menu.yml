@@ -6,7 +6,8 @@ mollo_dashboard.page:
   parent: system.admin
 
 mollo_dashboard.settings:
-  title: Settings
+  title: Dashboard Settings
+  description: 'Rearrange Dashboard Layout / Add Buttons'
   parent: system.admin_config_system
   route_name: mollo_dashboard.settings
   weight: 10

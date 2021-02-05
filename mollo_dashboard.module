@@ -64,5 +64,8 @@ function mollo_dashboard_form_alter(&$form, FormStateInterface $form_state, $for
     $form['#attached']['library'][] = 'mollo_dashboard/form';
   }
 
+  if ($form_id === 'mollo_dashboard_settings_form') {
+    $form['#attached']['library'][] = 'mollo_dashboard/form';
+  }
 }
 

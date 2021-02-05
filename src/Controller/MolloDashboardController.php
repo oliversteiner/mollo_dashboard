@@ -74,8 +74,6 @@ class MolloDashboardController extends ControllerBase {
   }
 
 
-
-
   /**
    * @return array[]
    */
@@ -84,13 +82,17 @@ class MolloDashboardController extends ControllerBase {
     $template_name = 'dashboard-page.html.twig';
     $template_file = $this->getTemplatePath() . $template_name;
     $template = file_get_contents($template_file);
-
+    $dashboards = $this->getViewsData();
+    $toolbar = $this->getToolbarData();
 
     return [
       'description' => [
         '#type' => 'inline_template',
         '#template' => $template,
-        '#context' => $this->getViewsData(),
+        '#context' => [
+          'dashboards' => $dashboards,
+          'toolbar' => $toolbar,
+        ],
       ],
     ];
   }
@@ -123,7 +125,7 @@ class MolloDashboardController extends ControllerBase {
     //  $views_on_site = Views::getViewsAsOptions(TRUE, 'enabled');
     //  $views = Views::getViewsAsOptions(TRUE, 'enabled');
     $views = Views::getAllViews();
-    $vars = [];
+    $variables = [];
 
     // dd($views);
 
@@ -210,13 +212,16 @@ class MolloDashboardController extends ControllerBase {
           $var['buttons']['button_3']["use_ajax"] = $dashboard["button_3_use_ajax"];
 
 
-          $vars[] = $var;
+          $variables[] = $var;
 
         }
       }
     }
-    $variables['dashboards'] = $vars;
     return $variables;
+  }
+
+  private function getToolbarData() {
+    return $this->config('mollo_dashboard.settings')->get();
   }
 
 }
