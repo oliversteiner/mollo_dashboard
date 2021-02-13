@@ -97,6 +97,11 @@
     <div class="row">
       <div class="container container-top-1">
         <div class="container-title">Top 1</div>
+        {% for dashboard in dashboards %}
+          {% if dashboard.position == 'top-1' %}
+            {% include '@mollo_dashboard/includes/_dashboard_article.html.twig' with dashboard %}
+          {% endif %}
+        {% endfor %}
       </div>
     </div>
 
@@ -104,6 +109,11 @@
     <div class="row">
       <div class="container container-top-2">
         <div class="container-title">Top 2</div>
+        {% for dashboard in dashboards %}
+          {% if dashboard.position == 'top-2' %}
+            {% include '@mollo_dashboard/includes/_dashboard_article.html.twig' with dashboard %}
+          {% endif %}
+        {% endfor %}
       </div>
     </div>
 
@@ -111,63 +121,37 @@
     <div class="row">
       <div class="container container-top-3">
         <div class="container-title">Top 3</div>
+        {% for dashboard in dashboards %}
+          {% if dashboard.position == 'top-3' %}
+            {% include '@mollo_dashboard/includes/_dashboard_article.html.twig' with dashboard %}
+          {% endif %}
+        {% endfor %}
       </div>
     </div>
 
     <div class="row">
+
       {# left 1 #}
       <div class="container container-left-1">
         <div class="container-title">Left 1</div>
+        {% for dashboard in dashboards %}
+          {% if dashboard.position == 'left-1' %}
+            {% include '@mollo_dashboard/includes/_dashboard_article.html.twig' with dashboard %}
+          {% endif %}
+        {% endfor %}
       </div>
+
       {# right 1 #}
       <div class="container container-right-1">
         <div class="container-title">Right 1</div>
+        {% for dashboard in dashboards %}
+          {% if dashboard.position == 'right-1' %}
+            {% include '@mollo_dashboard/includes/_dashboard_article.html.twig' with dashboard %}
+          {% endif %}
+        {% endfor %}
       </div>
     </div>
 
-
-    {# First all full length Boards #}
-    {% for dashboard in dashboards %}
-
-      {% if dashboard.full_size %}
-        <div class="row">
-          <div class="cell-fullsize">
-            {% include '@mollo_dashboard/includes/_dashboard_article.html.twig' with dashboard %}
-          </div>
-        </div>
-      {% endif %}
-    {% endfor %}
-
-
-    {# Second all 1 Columnes Boards #}
-    <div class="row-grid">
-      {% for dashboard in dashboards %}
-        {% if not dashboard.full_size %}
-
-          <div class="cell-variable">
-            {% include '@mollo_dashboard/includes/_dashboard_article.html.twig' with dashboard %}
-          </div>
-        {% endif %}
-      {% endfor %}
-    </div>
-
-
-    {# Second all 1 Columnes Boards #}
-    {# {% set columne_counter = 1 %}
-    {% for dashboard in dashboards %}
-      {% if not dashboard.full_size %}
-        {% if columne_counter == 1 %} <div class="row">{% endif %}
-        <div class="cell">
-          {% include '@mollo_dashboard/includes/_dashboard_article.html.twig' with dashboard %}
-        </div>
-        {% if columne_counter == 2 %}
-          </div>
-          {% set columne_counter = 1 %}
-        {% else %}
-          {% set columne_counter = columne_counter + 1 %}
-        {% endif %}
-      {% endif %}
-    {% endfor %} #}
 
   </main>
 
