@@ -3,10 +3,13 @@
 }
 
 .toolbar-icon-mollo-dashboard-main:before,
-.toolbar-icon-mollo-dashboard-main.active:before {
+.toolbar-icon-mollo-dashboard-page:before,
+.toolbar-icon-mollo-dashboard-main.active:before,
+.toolbar-icon-mollo-dashboard-page.active:before {
   background-image: url("../../images/icons/000000/mollo_dashboard.svg");
 }
 
+.toolbar .toolbar-bar .toolbar-icon.toolbar-icon-mollo-dashboard-page:before,
 .toolbar .toolbar-bar .toolbar-icon.toolbar-icon-mollo-dashboard-main:before {
   background-image: url("../../images/icons/000000/mollo_dashboard.svg");
   mask-image: url("../../images/icons/000000/mollo_dashboard.svg");

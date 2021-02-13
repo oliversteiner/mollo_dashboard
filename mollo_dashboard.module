@@ -43,10 +43,10 @@ function mollo_dashboard_theme() {
 
 // Add Library to every Page
 function mollo_dashboard_page_attachments(array &$page) {
-  if (!\Drupal::currentUser()->hasPermission('show dashboard')) {
-    return;
-  }
   $page['#attached']['library'][] = 'mollo_dashboard/button';
+  //if (!\Drupal::currentUser()->hasPermission('show dashboard')) {
+   // return;
+ // }
 }
 
 
