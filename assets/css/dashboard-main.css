@@ -5,6 +5,11 @@
   --mollo--dark-mode: red;
 }
 
+.mollo-dashboard {
+  /*
+   *  --------- Dev ---------
+   */
+}
 .mollo-dashboard .dashboard-toolbar {
   margin-bottom: 20px;
   display: flex;
@@ -19,6 +24,74 @@
 }
 .mollo-dashboard .button.button--small i, .mollo-dashboard .button.button--small svg {
   margin-right: 5px;
+}
+.mollo-dashboard .row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.mollo-dashboard .row .container {
+  border: 1px dashed #939393;
+  /* Debug */
+  padding: 10px 0;
+  margin: 10px 0;
+  border-radius: 10px;
+  background-color: rgba(100, 100, 100, 0.2);
+}
+.mollo-dashboard .row .container-top-1,
+.mollo-dashboard .row .container-top-2,
+.mollo-dashboard .row .container-top-3 {
+  width: 100%;
+}
+.mollo-dashboard .row .container-left-1,
+.mollo-dashboard .row .container-right-1 {
+  width: 49%;
+}
+.mollo-dashboard .row .container-title {
+  padding: 10px;
+}
+.mollo-dashboard .row-grid {
+  display: flex;
+  flex-flow: wrap;
+}
+.mollo-dashboard .views-field-vat-field-admin-buttons {
+  margin: auto 0;
+  padding: 0;
+  font-size: 1rem;
+}
+.mollo-dashboard td.views-field {
+  margin: 0;
+  padding: 0.5rem 0.6rem;
+  height: auto;
+}
+.mollo-dashboard .cell-fullsize {
+  width: 100%;
+}
+.mollo-dashboard .cell-variable {
+  width: auto;
+  margin: 0 20px 20px 0;
+  font-size: 0.9rem;
+}
+.mollo-dashboard .cell-variable td.views-field {
+  align-items: center;
+}
+.mollo-dashboard .cell-variable td.views-field-title {
+  max-width: 240px;
+}
+.mollo-dashboard .cell-variable td.views-field.views-field-field-icon,
+.mollo-dashboard .cell-variable td.views-field.views-field-field-titelbild {
+  margin: 0;
+  padding: 0;
+}
+
+.views-field-vat-field-admin-buttons {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.vat-no-break {
+  display: flex;
+  flex-wrap: nowrap;
 }
 
 /*# sourceMappingURL=dashboard-main.css.map */

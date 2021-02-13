@@ -1,0 +1,45 @@
+<article class="card mollo-dashboard-card">
+  <header class="card-header">
+    <h4 class="card-title">
+      <span class="card-title-icon"><i class="{{ dashboard.icon }}"></i></span>
+      {{ dashboard.title }}
+    </h4>
+    <div class="card-toolbar">
+
+      {# new #}
+      {% if dashboard.add_new.enabled %}
+        <a role="button" class="card-toolbar-item button button--small card-toolbar-item-button"
+           href="/node/{{ dashboard.add_new.node_type }}/add">
+          <span class="card-toolbar-item-button-icon"> <i class="fas fa-plus"> </i></span>
+        </a>
+      {% endif %}
+
+      {# List #}
+      {% if dashboard.list.enabled %}
+        <a role="button" class="card-toolbar-item button button--small  card-toolbar-item-button "
+           href="/{{ dashboard.list.path }}">
+          <span class="card-toolbar-item-button-icon"> <i class="fas fa-list"> </i></span>
+        </a>
+      {% endif %}
+
+      {# Aditional Buttons #}
+      {% for button in dashboard.buttons %}
+        {% if button.enabled %}
+
+          <a role="button"
+             class="card-toolbar-item button button--small  card-toolbar-item-button {{ button.use_ajax ? 'use_ajax' }}"
+             href="{{ button.path }}">
+            <span class="card-toolbar-item-button-icon"> <i class="{{ button.icon }}"> </i></span>
+            <span class="card-toolbar-item-button-label">{{ button.label }}</span>
+          </a>
+        {% endif %}
+      {% endfor %}
+      {# Settings #}
+    </div>
+  </header>
+  <main class="card-body">
+    {{ drupal_view(dashboard.view_id, dashboard.display_id) }}
+  </main>
+  <footer class="card-footer">
+  </footer>
+</article>
