@@ -44,7 +44,7 @@ class MolloDashboardController extends ControllerBase {
 
   public $enable;
 
-  public $size;
+  public $full_size;
 
   public $weight;
 
@@ -66,12 +66,8 @@ class MolloDashboardController extends ControllerBase {
 
   public $use_ajax;
 
-  /**
-   * @property $test
-   */
-  function view() {
-    $test = '';
-  }
+  public $position;
+
 
 
   /**
@@ -98,22 +94,6 @@ class MolloDashboardController extends ControllerBase {
   }
 
 
-  /**
-   * @return array
-   *
-   */
-  private function getPageVars(): array {
-
-    $test = TRUE;
-    $foo = 'Foo';
-    $bar = 'Bar';
-
-    $variables['mollo_dashboard']['test'] = $test;
-    $variables['mollo_dashboard']['foo'] = $foo;
-    $variables['mollo_dashboard']['bar'] = $bar;
-
-    return $variables;
-  }
 
   /**
    * @return array
@@ -127,7 +107,7 @@ class MolloDashboardController extends ControllerBase {
     $views = Views::getAllViews();
     $variables = [];
 
-    // dd($views);
+    //  dd($views);
 
     foreach ($views as $view_name => $view) {
 
@@ -138,11 +118,17 @@ class MolloDashboardController extends ControllerBase {
       foreach ($displays as $display_id => $display) {
         $title = '';
 
-        //dd($display);
-        if (isset($display['display_options']['display_extenders']['mollo_dashboard']['dashboard']['enable']) &&
-          $display['display_options']['display_extenders']['mollo_dashboard']['dashboard']['enable'] === 1) {
+/*      // Debug
+        if (isset($display['display_options']['display_extenders']['mollo_dashboard'])) {
+          dpm($display['display_options']['display_extenders']['mollo_dashboard']);
+        }*/
 
-          // dd($display['display_options']['display_extenders']['mollo_dashboard']);
+
+        //dd($display);
+        if (isset($display['display_options']['display_extenders']['mollo_dashboard']['dashboard']['enabled']) &&
+          $display['display_options']['display_extenders']['mollo_dashboard']['dashboard']['enabled'] == 1) {
+
+         // dpm($display['display_options']['display_extenders']['mollo_dashboard']);
 
 
           // Icon
@@ -182,30 +168,31 @@ class MolloDashboardController extends ControllerBase {
           $var['icon'] = $icon;
 
           // General
-          $var["enable"] = $dashboard["enable"];
-          $var["size"] = $dashboard["size"];
+          $var["enabled"] = $dashboard["enabled"];
+          $var["full_size"] = $dashboard["full_size"];
+          $var["position"] = $dashboard["position"];
           $var["weight"] = $dashboard["weight"];
           $var["title"] = $dashboard["title"];
           $var["info"] = $dashboard["info"];
 
           // Buttons
-          $var['add_new']["enable"] = $dashboard["add_new_enable"];
+          $var['add_new']["enabled"] = $dashboard["add_new_enabled"];
           $var['add_new']["node_type"] = $dashboard["add_new_node_type"];
-          $var['list']["enable"] = $dashboard["list_enable"];
+          $var['list']["enabled"] = $dashboard["list_enabled"];
           $var['list']["path"] = $dashboard["list_path"];
 
           // Aditional Buttons
-          $var['buttons']['button_1']["enable"] = $dashboard["button_1_enable"];
+          $var['buttons']['button_1']["enabled"] = $dashboard["button_1_enabled"];
           $var['buttons']['button_1']["label"] = $dashboard["button_1_label"];
           $var['buttons']['button_1']["icon"] = $dashboard["button_1_icon"];
           $var['buttons']['button_1']["path"] = $dashboard["button_1_path"];
           $var['buttons']['button_1']["use_ajax"] = $dashboard["button_1_use_ajax"];
-          $var['buttons']['button_2']["enable"] = $dashboard["button_2_enable"];
+          $var['buttons']['button_2']["enabled"] = $dashboard["button_2_enabled"];
           $var['buttons']['button_2']["label"] = $dashboard["button_2_label"];
           $var['buttons']['button_2']["icon"] = $dashboard["button_2_icon"];
           $var['buttons']['button_2']["path"] = $dashboard["button_2_path"];
           $var['buttons']['button_2']["use_ajax"] = $dashboard["button_2_use_ajax"];
-          $var['buttons']['button_3']["enable"] = $dashboard["button_3_enable"];
+          $var['buttons']['button_3']["enabled"] = $dashboard["button_3_enabled"];
           $var['buttons']['button_3']["label"] = $dashboard["button_3_label"];
           $var['buttons']['button_3']["icon"] = $dashboard["button_3_icon"];
           $var['buttons']['button_3']["path"] = $dashboard["button_3_path"];

@@ -7,7 +7,7 @@
 
 namespace Drupal\mollo_dashboard\Plugin\views\display_extender;
 
-use Drupal\node\Entity\NodeType;
+use Drupal\mollo_dashboard\Utils\MolloDashboardTrait;
 use Drupal\views\Plugin\views\display_extender\DisplayExtenderPluginBase;
 use Drupal\Core\Form\FormStateInterface;
 
@@ -25,6 +25,7 @@ use Drupal\Core\Form\FormStateInterface;
  */
 class DashboardExtender extends DisplayExtenderPluginBase {
 
+use MolloDashboardTrait;
 
   /**
    * Provide the key options for this plugin.
@@ -36,7 +37,7 @@ class DashboardExtender extends DisplayExtenderPluginBase {
       'contains' => [
         // General
         'enabled' => ['default' => FALSE, 'bool'],
-        'size' => ['default' => FALSE, 'bool'],
+        'full_size' => ['default' => FALSE, 'bool'],
         'weight' => ['default' => 1],
 
         // Header
@@ -116,11 +117,21 @@ class DashboardExtender extends DisplayExtenderPluginBase {
         '#suffix' => '</span>',
       ];
 
+
+      // Position
+      $form['dashboard']['general']['position'] = [
+        '#title' => $this->t('Position'),
+        '#type' => 'select',
+        '#default_value' => $dashboard['position'],
+        '#options' => $this->getOptionsPositions(),
+      ];
+
+
       // Size
-      $form['dashboard']['general']['size'] = [
+      $form['dashboard']['general']['full_size'] = [
         '#type' => 'checkbox',
-        '#title' => $this->t('Show as full size'),
-        '#default_value' => $dashboard['size'],
+        '#title' => $this->t('Show as full full_size'),
+        '#default_value' => $dashboard['full_size'],
         '#prefix' =>
           '<span class="mollo-form-button-inline">',
         '#suffix' => '</span>',
@@ -280,12 +291,13 @@ class DashboardExtender extends DisplayExtenderPluginBase {
   public function submitOptionsForm(&$form, FormStateInterface $form_state) {
     if ($form_state->get('section') == 'dashboard') {
       $new_values = $form_state->getValue('dashboard');
-      dpm($new_values);
+      // dpm($new_values);
 
       // General
       $options['enabled'] = $new_values['general']['enabled'];
-      $options['size'] = $new_values['general']['size'];
+      $options['full_size'] = $new_values['general']['full_size'];
       $options['weight'] = $new_values['general']['weight'];
+      $options['position'] = $new_values['general']['position'];
 
       // Header
       $options['title'] = $new_values['header']['title'];
@@ -320,7 +332,7 @@ class DashboardExtender extends DisplayExtenderPluginBase {
       $options['button_3_path'] = $new_values['buttons']['button_3']['path'];
       $options['button_3_use_ajax'] = $new_values['buttons']['button_3']['use_ajax'];
 
-      dpm($options);
+    //  dpm($options);
 
       $this->options['dashboard'] = $options;
     }
@@ -363,19 +375,7 @@ class DashboardExtender extends DisplayExtenderPluginBase {
     return $this->options['dashboard'] ?? [];
   }
 
-  /**
-   * @return array
-   */
-  protected function getOptionsListOfNodeTypes(): array {
-    $types = NodeType::loadMultiple();
 
-    // Add Node types to Options Array
-    $options_node_type = [];
-    foreach ($types as $key => $type) {
-      $options_node_type[$key] = $type->label();
-    }
-    return $options_node_type;
-  }
 
 
 }
