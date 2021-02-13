@@ -36,6 +36,7 @@ class SettingsForm extends ConfigFormBase {
 
     // General
     // - Clear Cache
+    // - Unig Gallery
     // - Media Browser
     // - Logout
 
@@ -72,6 +73,14 @@ class SettingsForm extends ConfigFormBase {
     ];
 
     // - Media Browser
+    $form['general']['unig'] = [
+      '#type' => 'checkbox',
+      '#title' => t('Unig Gallery'),
+      '#default_value' => $config->get('unig'),
+      '#tree' => FALSE,
+    ];
+
+    // - Media Browser
     $form['general']['media_browser'] = [
       '#type' => 'checkbox',
       '#title' => t('Media Browser'),
@@ -103,6 +112,12 @@ class SettingsForm extends ConfigFormBase {
 
     // Create a list of entity types.
     foreach ($entities as $entity_name => $info) {
+
+      // dont show UniG
+      if (($entity_name === 'unig_project') ||
+        ($entity_name === 'unig_file')) {
+        break;
+      }
 
       $title = $info['label'];
 
@@ -249,6 +264,11 @@ class SettingsForm extends ConfigFormBase {
       // - Clear Cache
       if ($key === 'clear_cache') {
         $config->set('clear_cache', $value);
+      }
+
+      // - Media Browser
+      elseif ($key === 'unig') {
+        $config->set('unig', $value);
       }
 
       // - Media Browser
