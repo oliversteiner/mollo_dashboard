@@ -66,12 +66,8 @@ class MolloDashboardController extends ControllerBase {
 
   public $use_ajax;
 
-  /**
-   * @property $test
-   */
-  function view() {
-    $test = '';
-  }
+  public $position;
+
 
 
   /**
@@ -174,6 +170,7 @@ class MolloDashboardController extends ControllerBase {
           // General
           $var["enabled"] = $dashboard["enabled"];
           $var["full_size"] = $dashboard["full_size"];
+          $var["position"] = $dashboard["position"];
           $var["weight"] = $dashboard["weight"];
           $var["title"] = $dashboard["title"];
           $var["info"] = $dashboard["info"];

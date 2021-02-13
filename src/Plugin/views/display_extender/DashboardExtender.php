@@ -7,7 +7,7 @@
 
 namespace Drupal\mollo_dashboard\Plugin\views\display_extender;
 
-use Drupal\node\Entity\NodeType;
+use Drupal\mollo_dashboard\Utils\MolloDashboardTrait;
 use Drupal\views\Plugin\views\display_extender\DisplayExtenderPluginBase;
 use Drupal\Core\Form\FormStateInterface;
 
@@ -25,6 +25,7 @@ use Drupal\Core\Form\FormStateInterface;
  */
 class DashboardExtender extends DisplayExtenderPluginBase {
 
+use MolloDashboardTrait;
 
   /**
    * Provide the key options for this plugin.
@@ -115,6 +116,16 @@ class DashboardExtender extends DisplayExtenderPluginBase {
           '<span class="mollo-form-button-inline">',
         '#suffix' => '</span>',
       ];
+
+
+      // Position
+      $form['dashboard']['general']['position'] = [
+        '#title' => $this->t('Position'),
+        '#type' => 'select',
+        '#default_value' => $dashboard['position'],
+        '#options' => $this->getOptionsPositions(),
+      ];
+
 
       // Size
       $form['dashboard']['general']['full_size'] = [
@@ -286,6 +297,7 @@ class DashboardExtender extends DisplayExtenderPluginBase {
       $options['enabled'] = $new_values['general']['enabled'];
       $options['full_size'] = $new_values['general']['full_size'];
       $options['weight'] = $new_values['general']['weight'];
+      $options['position'] = $new_values['general']['position'];
 
       // Header
       $options['title'] = $new_values['header']['title'];
@@ -363,19 +375,7 @@ class DashboardExtender extends DisplayExtenderPluginBase {
     return $this->options['dashboard'] ?? [];
   }
 
-  /**
-   * @return array
-   */
-  protected function getOptionsListOfNodeTypes(): array {
-    $types = NodeType::loadMultiple();
 
-    // Add Node types to Options Array
-    $options_node_type = [];
-    foreach ($types as $key => $type) {
-      $options_node_type[$key] = $type->label();
-    }
-    return $options_node_type;
-  }
 
 
 }
